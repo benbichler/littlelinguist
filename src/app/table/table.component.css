@@ -1,0 +1,14 @@
+.add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh; /* Adjust the height if needed */
+  }
+  
+  .add {
+    text-align: center;
+  }
+  
+  .toolbar-icon {
+    margin-left: 8px; /* Adjust the margin as needed */
+  }  

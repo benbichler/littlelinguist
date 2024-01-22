@@ -1,0 +1,16 @@
+/* footer.component.css */
+
+div {
+  display: flex;
+  justify-content: flex-end; /* Adjusted to "flex-end" for right alignment */
+  background-color: #f0f0f0; /* Adjust the background color as needed */
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 99%;
+}
+
+.mat-icon {
+  font-size: 24px; /* Adjust the icon size as needed */
+  color: #333; /* Adjust the icon color as needed */
+}
