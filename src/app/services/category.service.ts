@@ -12,7 +12,7 @@ export class CategoryService {
   nextId = 0;
 
   constructor(){
-    this.categories.set(23, new Category(23, "Ben", Language.English, Language.Hebrew));
+     //this.categories.set(23, new Category(23, "Ben", Language.English, Language.Hebrew));
   }
   
 
