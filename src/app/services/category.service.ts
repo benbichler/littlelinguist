@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Category } from '../shared/model/category';
-import { Language } from '../shared/model/language';
+import {Injectable} from '@angular/core';
+import {Category} from '../shared/model/category';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +13,10 @@ export class CategoryService {
   constructor(){
      //this.categories.set(23, new Category(23, "Ben", Language.English, Language.Hebrew));
   }
-  
 
+  currentName() {
+    return this.get(this.nextId)?.name || ''
+  }
   list(): Category[] {
     return Array.from(this.categories.values());
   }
@@ -23,11 +24,10 @@ export class CategoryService {
   get(id: number): Category | undefined {
     return this.categories.get(id);
     }
-    
-   delete(id: number): void {
+
+  delete(id: number): void {
     this.categories.delete(id);
     }
-    
 
     add(newCategoryData:Category) {
       newCategoryData.id = this.nextId;

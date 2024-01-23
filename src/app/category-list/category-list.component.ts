@@ -7,11 +7,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteCategoryDialogComponent } from '../delete-category-dialog/delete-category-dialog.component';
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-category-list',
   standalone: true,
-  imports: [MatTableModule, RouterModule, MatIconModule, MatButtonModule],
+  imports: [MatTableModule, RouterModule, MatIconModule, MatButtonModule, DatePipe],
   templateUrl: './category-list.component.html',
   styleUrl: './category-list.component.css'
 })
@@ -37,5 +38,8 @@ export class CategoryListComponent implements OnInit {
     });
   }
 
+  getCategoryWords(category: Category): string {
+    return category.words.map(word => `${word.origin} - ${word.target}`).join(', ');
+  }
 
 }

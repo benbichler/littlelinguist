@@ -1,12 +1,12 @@
-import { Language } from './language';
-import { TranslatedWord } from './translateword';
+import {Language} from './language';
+import {TranslatedWord} from './translateword';
 
 export class Category {
     id : number;
     name : string;
     origin : Language;
     target : Language;
-    lastUpdateDate = new Date();
+    date = new Date();
     words : TranslatedWord[] = [];
 
     constructor(id: number,
