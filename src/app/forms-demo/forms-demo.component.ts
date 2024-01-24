@@ -22,7 +22,7 @@ export class FormsDemoComponent implements OnInit {
   @Input() idString?: string;
   currentCategory: Category
   constructor(private categoryService: CategoryService, private router: Router, private route: ActivatedRoute) {
-     this.currentCategory = new Category(categoryService.nextId, categoryService.currentName() , Language.English, Language.Hebrew);
+     this.currentCategory = new Category(categoryService.nextId, '' , Language.English, Language.Hebrew);
   }
 
   ngOnInit(): void {
@@ -30,9 +30,12 @@ export class FormsDemoComponent implements OnInit {
       const idString = params['idString'];
       if (idString) {
         let id: number = parseInt(idString);
+        this.idString = idString
         const category = this.categoryService.get(id);
         if (category) {
           this.currentCategory = category;
+        } else {
+          this.currentCategory =  new Category(id,'',Language.English, Language.Hebrew)
         }
       }
     });
@@ -58,11 +61,7 @@ export class FormsDemoComponent implements OnInit {
   }
   onSubmitRegistration() {
     console.log("Form submitted!");
-    if (this.idString) {
-      this.categoryService.update(this.currentCategory);
-    } else {
-      this.categoryService.add(this.currentCategory);
-    }
+    this.categoryService.updateOrAdd(this.currentCategory);
     this.router.navigate(['/']);
   }
 }

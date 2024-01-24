@@ -40,5 +40,10 @@ export class CategoryService {
         this.categories.set(category.id, category);
       }
     }
+    updateOrAdd(category: Category) : void {
+      this.categories.set(category.id,category)
+      if (this.nextId < category.id) this.nextId++
+    }
+
 
 }
