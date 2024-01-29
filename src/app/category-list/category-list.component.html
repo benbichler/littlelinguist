@@ -9,7 +9,7 @@
       <ng-container matColumnDef="words">
         <mat-header-cell *matHeaderCellDef> Words </mat-header-cell>
         <mat-cell *matCellDef="let category">
-          {{ getCategoryWords(category) }}
+          {{category.words.length}}
         </mat-cell>
       </ng-container>
   
