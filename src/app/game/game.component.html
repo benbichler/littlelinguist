@@ -1,0 +1,14 @@
+<div class="game-container">
+  <h1>Welcome to the Game!</h1>
+  <div>
+    <label for="category-select">Choose a Category:</label>
+    <select id="category-select" [(ngModel)]="selectedCategoryId" (change)="onCategorySelected()">
+      <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+    </select>
+  </div>
+  <div *ngIf="selectedCategory">
+    <h3>You selected: {{ selectedCategory.name }}</h3>
+  </div>
+
+  <button (click)="startGame()" [disabled]="!selectedCategory">Start Game</button>
+</div>

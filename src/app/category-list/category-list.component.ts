@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../services/category.service';
 import { Category } from '../shared/model/category';
 import { MatTableModule } from '@angular/material/table';
-import { RouterModule } from '@angular/router';
+import {Router, RouterModule} from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteCategoryDialogComponent } from '../delete-category-dialog/delete-category-dialog.component';
 import {DatePipe} from "@angular/common";
+import {LocalStorageService} from "../services/localStorage.service";
 
 @Component({
   selector: 'app-category-list',
@@ -21,10 +22,19 @@ export class CategoryListComponent implements OnInit {
   displayedColumns: string[] = ['name', 'words', 'lastModified', 'actions'];
   categories: Category [] = []
 
-  constructor(private categoryService: CategoryService, private dialog: MatDialog) {}
+  constructor(private categoryService: CategoryService, private localStorageService: LocalStorageService, private dialog: MatDialog, private router: Router) {}
 
   ngOnInit(): void {
     this.categories=this.categoryService.list()
+  }
+
+  addNewCategory(): void {
+    this.router.navigate([`/category/${this.categories.length}`]);
+  }
+
+  editCategory(categoryId: number): void {
+    this.localStorageService.setCurrentCategoryId(categoryId.toString());
+    this.router.navigate(['/category', categoryId]);
   }
 
   deleteCategory(id:number, name:string){
@@ -36,10 +46,6 @@ export class CategoryListComponent implements OnInit {
             this.categories=this.categoryService.list()
           }
     });
-  }
-
-  getCategoryWords(category: Category): string {
-    return category.words.map(word => `${word.origin} - ${word.target}`).join(', ');
   }
 
 }

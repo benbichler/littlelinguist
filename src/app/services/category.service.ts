@@ -1,49 +1,74 @@
-import {Injectable} from '@angular/core';
-import {Category} from '../shared/model/category';
+import { Injectable } from '@angular/core';
+import { LocalStorageService } from './localStorage.service';
+import { Category } from '../shared/model/category';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
-
 export class CategoryService {
-  categories = new Map<number, Category>();
-  nextId = 0;
+  private nextId = 0;
 
-  constructor(){
-     //this.categories.set(23, new Category(23, "Ben", Language.English, Language.Hebrew));
+  constructor(private localStorageService: LocalStorageService) {
+    this.initializeCategories();
   }
 
-  currentName() {
-    return this.get(this.nextId)?.name || ''
-  }
-  list(): Category[] {
-    return Array.from(this.categories.values());
-  }
-
-  get(id: number): Category | undefined {
-    return this.categories.get(id);
+  private initializeCategories(): void {
+    const storedCategories = this.localStorageService.getCategories();
+    if (storedCategories && storedCategories.length > 0) {
+      this.nextId = Math.max(...storedCategories.map(c => c.id)) + 1;
     }
+  }
+
+  public getNextId(): number {
+    return this.nextId;
+  }
+
+  list(): Category[] {
+    return this.localStorageService.getCategories();
+  }
+
+  get(id: number): Category {
+    const category = this.list().find(category => category.id === id);
+    if (!category) {
+      throw new Error(`Category with ID ${id} not found.`);
+    }
+    return category;
+  }
 
   delete(id: number): void {
-    this.categories.delete(id);
+    if (!this.list().some(category => category.id === id)) {
+      throw new Error(`Category with ID ${id} not found.`);
     }
+    let categories = this.list().filter(category => category.id !== id);
+    this.localStorageService.saveCategories(categories);
+  }
 
-    add(newCategoryData:Category) {
-      newCategoryData.id = this.nextId;
-      this.categories.set(this.nextId, newCategoryData);
-      this.nextId++;
+  add(newCategoryData: Category): void {
+    const categories = this.list();
+    newCategoryData.id = this.nextId++;
+    categories.push(newCategoryData);
+    this.localStorageService.saveCategories(categories);
+  }
+
+  update(category: Category): void {
+    let categories = this.list();
+    const index = categories.findIndex(c => c.id === category.id);
+    if (index === -1) {
+      throw new Error(`Category with ID ${category.id} not found.`);
     }
+    categories[index] = category;
+    this.localStorageService.saveCategories(categories);
+  }
 
-    update(category: Category) : void {
-      if (this.categories.has(category.id)){
-        this.categories.set(category.id, category);
-      }
+  updateOrAdd(category: Category): void {
+    let categories = this.list();
+    const index = categories.findIndex(c => c.id === category.id);
+    if (index !== -1) {
+      categories[index] = category;
+    } else {
+      category.id = this.nextId++;
+      categories.push(category);
     }
-    updateOrAdd(category: Category) : void {
-      this.categories.set(category.id,category)
-      if (this.nextId < category.id) this.nextId++
-    }
-
-
+    this.localStorageService.saveCategories(categories);
+  }
 }

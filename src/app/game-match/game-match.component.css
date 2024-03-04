@@ -1,0 +1,9 @@
+.correct-match {
+  color: green;
+}
+
+.incorrect-match {
+  color: red;
+}
+
+/* Add styles for matched and unmatched words as needed */

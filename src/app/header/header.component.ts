@@ -18,4 +18,8 @@ export class HeaderComponent {
   navigateHome() {
     this.router.navigate(['/']);
   }
+
+  navigateGame() {
+    this.router.navigate(['/game']);
+  }
 }

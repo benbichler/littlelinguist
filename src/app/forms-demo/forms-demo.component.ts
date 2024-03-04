@@ -1,15 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {FormsModule, NgModel} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Router} from '@angular/router';
 import { CategoryService } from '../services/category.service';
 import { Category } from '../shared/model/category';
 import { Language } from '../shared/model/language';
 import {TranslatedWord} from "../shared/model/translateword";
 import {NgForOf, NgIf} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
+import {LocalStorageService} from "../services/localStorage.service";
 
 @Component({
   selector: 'app-forms-demo',
@@ -19,26 +20,22 @@ import {MatIconModule} from "@angular/material/icon";
   styleUrls: ['./forms-demo.component.css']
 })
 export class FormsDemoComponent implements OnInit {
-  @Input() idString?: string;
   currentCategory: Category
-  constructor(private categoryService: CategoryService, private router: Router, private route: ActivatedRoute) {
-     this.currentCategory = new Category(categoryService.nextId, '' , Language.English, Language.Hebrew);
+  constructor(private categoryService: CategoryService, private localStorageService: LocalStorageService, private router: Router) {
+    this.currentCategory = new Category(categoryService.getNextId(), '' , Language.English, Language.Hebrew);
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      const idString = params['idString'];
-      if (idString) {
-        let id: number = parseInt(idString);
-        this.idString = idString
-        const category = this.categoryService.get(id);
-        if (category) {
-          this.currentCategory = category;
-        } else {
-          this.currentCategory =  new Category(id,'',Language.English, Language.Hebrew)
-        }
+    const idString = this.localStorageService.getCurrentCategoryId();
+    if (idString) {
+      let id: number = parseInt(idString);
+      const category = this.categoryService.get(id);
+      if (category) {
+        this.currentCategory = category;
+      } else {
+        this.currentCategory = new Category(id, '', Language.English, Language.Hebrew);
       }
-    });
+    }
   }
 
   addNewWord(): void {
