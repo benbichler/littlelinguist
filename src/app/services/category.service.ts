@@ -1,74 +1,77 @@
 import { Injectable } from '@angular/core';
-import { LocalStorageService } from './localStorage.service';
 import { Category } from '../shared/model/category';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class CategoryService {
-  private nextId = 0;
 
-  constructor(private localStorageService: LocalStorageService) {
-    this.initializeCategories();
+  private readonly NEXT_ID_KEY = 'nextId';
+  private readonly CATEGORIES_KEY = 'categories';
+  private idStringKey = 'currentCategoryId';
+  private categoriesKey = 'categories';
+  
+  private setCategories(allCategories: Map<number, Category>) : void {
+    localStorage.setItem(this.CATEGORIES_KEY, JSON.stringify(Array.from(allCategories.values())));
   }
 
-  private initializeCategories(): void {
-    const storedCategories = this.localStorageService.getCategories();
-    if (storedCategories && storedCategories.length > 0) {
-      this.nextId = Math.max(...storedCategories.map(c => c.id)) + 1;
+  private getCategories() : Map<number, Category>{
+    let categoriesString = localStorage.getItem(this.CATEGORIES_KEY);
+    let idToCategory = new Map<number, Category>();
+
+    if(categoriesString) {
+      JSON.parse(categoriesString).forEach((category: Category) => {
+        Object.setPrototypeOf(category, Category.prototype);
+        idToCategory.set(category.id, category);
+      });
     }
+    return idToCategory;
   }
 
-  public getNextId(): number {
-    return this.nextId;
+  private getNextId(): number {
+  let nextIdString = localStorage.getItem(this.NEXT_ID_KEY);
+  return nextIdString ? parseInt(nextIdString) : 0; 
+  }
+
+  private setNextId(id: number) : void {
+    localStorage.setItem(this.NEXT_ID_KEY, id.toString());
   }
 
   list(): Category[] {
-    return this.localStorageService.getCategories();
+    return Array.from(this.getCategories().values());
   }
 
   get(id: number): Category {
-    const category = this.list().find(category => category.id === id);
-    if (!category) {
-      throw new Error(`Category with ID ${id} not found.`);
-    }
-    return category;
+   return this.getCategories().get(id)!;
   }
 
   delete(id: number): void {
-    if (!this.list().some(category => category.id === id)) {
-      throw new Error(`Category with ID ${id} not found.`);
-    }
-    let categories = this.list().filter(category => category.id !== id);
-    this.localStorageService.saveCategories(categories);
+   let categoriesMap = this.getCategories();
+   categoriesMap.delete(id);
+   this.setCategories(categoriesMap);
   }
 
-  add(newCategoryData: Category): void {
-    const categories = this.list();
-    newCategoryData.id = this.nextId++;
-    categories.push(newCategoryData);
-    this.localStorageService.saveCategories(categories);
+  add(category: Category) {
+    let newId = this.getNextId();
+    let categoriesMap = this.getCategories();
+    category.id = newId;
+    categoriesMap.set(category.id, category);
+    this.setCategories(categoriesMap);
+    newId++;
+    this.setNextId(newId);
   }
 
-  update(category: Category): void {
-    let categories = this.list();
-    const index = categories.findIndex(c => c.id === category.id);
-    if (index === -1) {
-      throw new Error(`Category with ID ${category.id} not found.`);
-    }
-    categories[index] = category;
-    this.localStorageService.saveCategories(categories);
+  update(category: Category) {
+    let categoriesMap = this.getCategories();
+    categoriesMap.set(category.id, category);
+    this.setCategories(categoriesMap);
   }
 
-  updateOrAdd(category: Category): void {
-    let categories = this.list();
-    const index = categories.findIndex(c => c.id === category.id);
-    if (index !== -1) {
-      categories[index] = category;
-    } else {
-      category.id = this.nextId++;
-      categories.push(category);
-    }
-    this.localStorageService.saveCategories(categories);
+  setCurrentCategoryId(idString: string): void{
+    return localStorage.setItem(this.idStringKey, idString);
+  }
+
+  getCurrentCategoryId() : string | null {
+    return localStorage.getItem(this.idStringKey);
   }
 }

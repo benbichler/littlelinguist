@@ -7,7 +7,6 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {NgForOf, NgIf} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
-import {LocalStorageService} from "../services/localStorage.service";
 import {MatSelectModule} from "@angular/material/select";
 
 @Component({
@@ -26,7 +25,6 @@ export class GameComponent implements OnInit {
 
 
   constructor(
-    private localStorageService: LocalStorageService,
     private categoryService: CategoryService,
   ) {
   }
@@ -38,7 +36,7 @@ export class GameComponent implements OnInit {
   }
 
   loadCurrentCategory(): void {
-    const currentCategoryId = this.localStorageService.getCurrentCategoryId();
+    const currentCategoryId = this.categoryService.getCurrentCategoryId();
     if (currentCategoryId) {
       this.currentCategory = this.categoryService.list().find(category => category.id === +currentCategoryId);
     }

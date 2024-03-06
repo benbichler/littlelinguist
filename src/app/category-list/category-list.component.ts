@@ -8,7 +8,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteCategoryDialogComponent } from '../delete-category-dialog/delete-category-dialog.component';
 import {DatePipe} from "@angular/common";
-import {LocalStorageService} from "../services/localStorage.service";
 
 @Component({
   selector: 'app-category-list',
@@ -22,7 +21,7 @@ export class CategoryListComponent implements OnInit {
   displayedColumns: string[] = ['name', 'words', 'lastModified', 'actions'];
   categories: Category [] = []
 
-  constructor(private categoryService: CategoryService, private localStorageService: LocalStorageService, private dialog: MatDialog, private router: Router) {}
+  constructor(private categoryService: CategoryService, private dialog: MatDialog, private router: Router) {}
 
   ngOnInit(): void {
     this.categories=this.categoryService.list()
@@ -33,7 +32,7 @@ export class CategoryListComponent implements OnInit {
   }
 
   editCategory(categoryId: number): void {
-    this.localStorageService.setCurrentCategoryId(categoryId.toString());
+    this.categoryService.setCurrentCategoryId(categoryId.toString());
     this.router.navigate(['/category', categoryId]);
   }
 

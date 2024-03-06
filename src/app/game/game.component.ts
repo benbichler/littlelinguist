@@ -8,7 +8,6 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {NgForOf, NgIf} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
-import {LocalStorageService} from "../services/localStorage.service";
 
 @Component({
   selector: 'app-game',
@@ -23,7 +22,6 @@ export class GamePageComponent implements OnInit {
   selectedCategory: Category | undefined;
 
   constructor(
-    private localStorageService: LocalStorageService,
     private categoryService: CategoryService,
     private router: Router
   ) {}
@@ -40,7 +38,7 @@ export class GamePageComponent implements OnInit {
     this.selectedCategory = this.categories.find(category => category.id === +this.selectedCategoryId);
   }
   startGame(): void {
-    this.localStorageService.setCurrentCategoryId(this.selectedCategoryId.toString())
+    this.categoryService.setCurrentCategoryId(this.selectedCategoryId.toString())
     this.router.navigate([`/game/${this.categories.length}`]);
   }
 }

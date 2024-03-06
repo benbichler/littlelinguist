@@ -10,7 +10,6 @@ import { Language } from '../shared/model/language';
 import {TranslatedWord} from "../shared/model/translateword";
 import {NgForOf, NgIf} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
-import {LocalStorageService} from "../services/localStorage.service";
 
 @Component({
   selector: 'app-forms-demo',
@@ -20,13 +19,11 @@ import {LocalStorageService} from "../services/localStorage.service";
   styleUrls: ['./forms-demo.component.css']
 })
 export class FormsDemoComponent implements OnInit {
-  currentCategory: Category
-  constructor(private categoryService: CategoryService, private localStorageService: LocalStorageService, private router: Router) {
-    this.currentCategory = new Category(categoryService.getNextId(), '' , Language.English, Language.Hebrew);
-  }
+  currentCategory: Category = new Category (0, '', Language.English, Language.Hebrew)
+  constructor(private categoryService: CategoryService, private router: Router) {}
 
   ngOnInit(): void {
-    const idString = this.localStorageService.getCurrentCategoryId();
+    const idString = this.categoryService.getCurrentCategoryId();
     if (idString) {
       let id: number = parseInt(idString);
       const category = this.categoryService.get(id);
@@ -58,7 +55,11 @@ export class FormsDemoComponent implements OnInit {
   }
   onSubmitRegistration() {
     console.log("Form submitted!");
-    this.categoryService.updateOrAdd(this.currentCategory);
+    if(this.categoryService.getCurrentCategoryId()) { 
+      this.categoryService.update(this.currentCategory);
+    } else{
+      this.categoryService.add(this.currentCategory);
+    }
     this.router.navigate(['/']);
   }
 }
