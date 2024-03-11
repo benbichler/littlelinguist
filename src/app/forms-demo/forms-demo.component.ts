@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {FormsModule, NgModel} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,19 +19,17 @@ import {MatIconModule} from "@angular/material/icon";
   styleUrls: ['./forms-demo.component.css']
 })
 export class FormsDemoComponent implements OnInit {
-  currentCategory: Category = new Category (0, '', Language.English, Language.Hebrew)
+  currentCategory: Category = new Category(-1, '', Language.English, Language.Hebrew)
   constructor(private categoryService: CategoryService, private router: Router) {}
+  @Input()idString?:string
 
   ngOnInit(): void {
-    const idString = this.categoryService.getCurrentCategoryId();
-    if (idString) {
-      let id: number = parseInt(idString);
+    if (this.idString) {
+      let id: number = parseInt(this.idString);
       const category = this.categoryService.get(id);
       if (category) {
         this.currentCategory = category;
-      } else {
-        this.currentCategory = new Category(id, '', Language.English, Language.Hebrew);
-      }
+      } 
     }
   }
 

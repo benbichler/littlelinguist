@@ -28,7 +28,7 @@ export class CategoryListComponent implements OnInit {
   }
 
   addNewCategory(): void {
-    this.router.navigate([`/category/${this.categories.length}`]);
+    this.router.navigate(['/categorynew']);
   }
 
   editCategory(categoryId: number): void {

@@ -39,6 +39,6 @@ export class GamePageComponent implements OnInit {
   }
   startGame(): void {
     this.categoryService.setCurrentCategoryId(this.selectedCategoryId.toString())
-    this.router.navigate([`/game/${this.categories.length}`]);
+    this.router.navigate([`/game/${this.selectedCategoryId}`]);
   }
 }

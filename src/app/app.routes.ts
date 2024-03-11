@@ -8,6 +8,7 @@ import {GameComponent} from "./game-match/game-match.component";
 export const routes: Routes = [
     {path: '', component: CategoryListComponent},
     {path: 'category/:idString', component: FormsDemoComponent},
+    {path: 'categorynew', component: FormsDemoComponent},
     {path: 'game', component: GamePageComponent},
     {path: 'game/:idString', component: GameComponent},
 ];
