@@ -37,6 +37,7 @@ export class GamePageComponent implements OnInit {
   onCategorySelected(): void {
     this.selectedCategory = this.categories.find(category => category.id === +this.selectedCategoryId);
   }
+  
   startGame(): void {
     this.categoryService.setCurrentCategoryId(this.selectedCategoryId.toString())
     this.router.navigate([`/game/${this.selectedCategoryId}`]);

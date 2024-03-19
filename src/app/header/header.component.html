@@ -3,11 +3,11 @@
     <button mat-button [matMenuTriggerFor]="menu">Menu</button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item>מצב ניהול</button>
-      <button mat-menu-item>מצב משחק</button>
+      <button mat-menu-item routerLink="/game">מצב משחק</button>
     </mat-menu>
 
     <span (click)="navigateHome()" style="cursor: pointer;">Little Linguist</span>
-    <span (click)="navigateGame()" style="padding-left: 10px; cursor: pointer;">Play with me</span>
+    <span (click)="showCards()" style="padding-left: 20px; cursor: pointer;">View Cards</span>
 
       <div class="toolbar-icons"></div>
          <mat-icon class="toolbar-icon">person</mat-icon>

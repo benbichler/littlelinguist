@@ -1,0 +1,12 @@
+.category-view-container {
+    display: flex;
+}
+
+.category-card {
+    margin: 8px;
+    transition: background-color 0.3s;
+}
+
+.category-card:hover {
+    background-color: green
+}

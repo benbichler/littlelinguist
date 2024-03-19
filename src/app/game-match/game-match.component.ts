@@ -8,6 +8,8 @@ import {MatInputModule} from "@angular/material/input";
 import {NgForOf, NgIf} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSelectModule} from "@angular/material/select";
+import { GameInformationService } from '../services/game-information.service';
+import { GameProfile } from '../shared/model/gameprofile';
 
 @Component({
   selector: 'app-game-match',
@@ -17,6 +19,8 @@ import {MatSelectModule} from "@angular/material/select";
   styleUrl: './game-match.component.css'
 })
 export class GameComponent implements OnInit {
+  games: GameProfile [] = []
+  currentGame: GameProfile | undefined;
   currentCategory?: Category;
   fixedWordIndex: number = 0;
   selectedOptions: string[] = [];
@@ -25,7 +29,7 @@ export class GameComponent implements OnInit {
 
 
   constructor(
-    private categoryService: CategoryService,
+    private categoryService: CategoryService, private gameInformationService: GameInformationService
   ) {
   }
 
@@ -33,6 +37,10 @@ export class GameComponent implements OnInit {
     this.loadCurrentCategory();
     this.changeWord();
     this.show = false
+    this.games = this.gameInformationService.list();
+    if (this.games.length > 0) {
+      this.currentGame = this.games[0]; 
+    }
   }
 
   loadCurrentCategory(): void {
