@@ -53,7 +53,7 @@ export class FormsDemoComponent implements OnInit {
   }
   onSubmitRegistration() {
     console.log("Form submitted!");
-    if(this.categoryService.getCurrentCategoryId()) { 
+    if(this.idString) { 
       this.categoryService.update(this.currentCategory);
     } else{
       this.categoryService.add(this.currentCategory);

@@ -9,8 +9,7 @@ export class GameInformationService {
 
  
   private allGames : GameProfile[] = [
-    new GameProfile(1,"Matching Game","Match the word and it's correct translation", GameDifficulty.EASY, "www.littlelinguist.ono/matchingame")
-
+    new GameProfile(1,"Matching Game","Match the word and it's correct translation", GameDifficulty.EASY, "www.littlelinguist.ono/matchingame"),
   ]
 
 

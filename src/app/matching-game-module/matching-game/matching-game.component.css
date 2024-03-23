@@ -1,0 +1,35 @@
+.header {
+  text-align: center;
+  margin-bottom: 20px;  
+}
+
+.title {
+  font-size: 24px;
+}
+
+.word-list {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.english-column,
+.hebrew-column {
+  margin: 0 10px;
+}
+
+.word-card {
+  margin-bottom: 10px;
+  width: 200px;
+}
+
+.word-item {
+  padding: 16px;
+  color: white;
+  text-align: center;
+}
+
+.exit-button{
+  margin-right: 1420px;
+  margin-top: 10px;
+}

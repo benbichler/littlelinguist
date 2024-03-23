@@ -42,27 +42,38 @@ export class CategoryService {
   }
 
   get(id: number): Category {
-   return this.getCategories().get(id)!;
+   let categoriesMap = this.getCategories().get(id)!;
+   if(!categoriesMap){
+    throw new Error(`Category number ${id} doesn't exist and can not be retrieved.`)
+   }
+   return categoriesMap;
   }
 
   delete(id: number): void {
    let categoriesMap = this.getCategories();
+   if(!categoriesMap.has(id)) {
+    throw new Error(`Category number ${id} doesn't exist and can not be deleted.`);
+   }
    categoriesMap.delete(id);
    this.setCategories(categoriesMap);
   }
 
   add(category: Category) {
-    let newId = this.getNextId();
+    category.id = this.getNextId();
+    category.date = new Date();
+
     let categoriesMap = this.getCategories();
-    category.id = newId;
     categoriesMap.set(category.id, category);
+    
     this.setCategories(categoriesMap);
-    newId++;
-    this.setNextId(newId);
+    this.setNextId(++category.id);
   }
 
   update(category: Category) {
     let categoriesMap = this.getCategories();
+    if(!categoriesMap.has(category.id)){
+      throw new Error(`Category number ${category.id} doesn't exist and can not be updated.`)
+    }
     categoriesMap.set(category.id, category);
     this.setCategories(categoriesMap);
   }

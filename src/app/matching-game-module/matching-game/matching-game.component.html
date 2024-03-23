@@ -1,0 +1,27 @@
+<div class="header">
+  <div class="exit-button">
+    <app-exit-game-button></app-exit-game-button>
+  </div>
+  <h1 class="title">Matching Game - {{ currentCategory?.name }}</h1>
+</div>
+
+<div class="word-list">
+  <div class="english-column">
+    <mat-card *ngFor="let word of shuffledEnglishWords" class="word-card">
+      <div class="word-item">
+        {{ word }}
+      </div>
+    </mat-card>
+  </div>
+  <div class="hebrew-column">
+    <mat-card *ngFor="let word of shuffledHebrewWords" class="word-card">
+      <div class="word-item">
+        {{ word }}
+      </div>
+    </mat-card>
+  </div>
+</div>
+
+
+
+

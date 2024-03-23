@@ -42,7 +42,7 @@ export class CategoryViewComponent implements OnInit {
     dialogRef.afterClosed().subscribe(confirmed => {
       if (confirmed) {
         this.categoryService.setCurrentCategoryId(id.toString());
-        this.router.navigate([`/game/${id}`]);
+        this.router.navigate([`/matchingame/${id}`]);
       }
     })
 }

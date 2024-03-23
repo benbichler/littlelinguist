@@ -1,6 +1,10 @@
-<h1>Let's Play</h1>
-<div class="category-view-container">
-    <div *ngFor="let c of categories" class="category-card">
-        <app-category-card [category]="c" button (click)="startGame(c.id, c.name)"></app-category-card>
+
+
+    <h1 class="title">Let's Play</h1>
+    <div class="categories-container">
+        <div *ngFor="let c of categories" class="category-card">
+            <app-category-card [category]="c" button (click)="startGame(c.id, c.name)"></app-category-card>
+        </div>
     </div>
-</div>
+
+

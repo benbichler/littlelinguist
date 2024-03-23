@@ -8,8 +8,8 @@
 </mat-form-field>
 <div mat-dialog-content class="dialog-content" *ngIf="selectedGame">
     <h2 class="dialog-title">{{ selectedGame.gameName }}</h2>
-    <p>Description: {{ selectedGame.gameDesc }}</p>
-    <p>Difficulty: {{ selectedGame.difficultyLev }}</p>
+    <p class="dialog-text">Description: {{ selectedGame.gameDesc }}</p>
+    <p class="dialog-text">Difficulty: {{ selectedGame.difficultyLev }}</p>
 </div>
 
 <div mat-dialog-actions class="dialog-actions">
