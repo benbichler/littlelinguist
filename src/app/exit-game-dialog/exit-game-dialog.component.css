@@ -21,7 +21,7 @@
   .exit-dialog-button {
     margin: 0 10px; 
     min-width: 100px; 
-    background-color: #f44336; 
+    background-color: darkgray; 
     color: white; 
     border: none; 
     border-radius: 4px; 
