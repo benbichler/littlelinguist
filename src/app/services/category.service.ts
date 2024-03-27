@@ -60,7 +60,7 @@ export class CategoryService {
 
   add(category: Category) {
     category.id = this.getNextId();
-    category.date = new Date();
+    category.lastModifiedDate = new Date();
 
     let categoriesMap = this.getCategories();
     categoriesMap.set(category.id, category);

@@ -8,20 +8,12 @@
 <div class="word-list">
   <div class="english-column">
     <mat-card *ngFor="let word of shuffledEnglishWords" class="word-card">
-      <div class="word-item">
-        {{ word }}
-      </div>
+      <app-card-word [word]="word"></app-card-word>
     </mat-card>
   </div>
   <div class="hebrew-column">
     <mat-card *ngFor="let word of shuffledHebrewWords" class="word-card">
-      <div class="word-item">
-        {{ word }}
-      </div>
+      <app-card-word [word]="word"></app-card-word>
     </mat-card>
   </div>
 </div>
-
-
-
-

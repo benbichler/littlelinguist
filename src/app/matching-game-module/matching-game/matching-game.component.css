@@ -1,10 +1,20 @@
 .header {
-  text-align: center;
-  margin-bottom: 20px;  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
 }
 
 .title {
   font-size: 24px;
+  width: 100%;
+  text-align: center;
+}
+
+.exit-button {
+  position: absolute;
+  left: 0;
 }
 
 .word-list {
@@ -21,15 +31,4 @@
 .word-card {
   margin-bottom: 10px;
   width: 200px;
-}
-
-.word-item {
-  padding: 16px;
-  color: white;
-  text-align: center;
-}
-
-.exit-button{
-  margin-right: 1420px;
-  margin-top: 10px;
 }

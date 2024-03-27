@@ -15,7 +15,7 @@
 
       <ng-container matColumnDef="lastModified">
         <mat-header-cell *matHeaderCellDef>Last edit date</mat-header-cell>
-        <mat-cell *matCellDef="let category"> {{category.date | date: 'fullDate'}} </mat-cell>
+        <mat-cell *matCellDef="let category"> {{category.lastModifiedDate | date: 'fullDate'}} </mat-cell>
       </ng-container>
 
 

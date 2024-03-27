@@ -19,7 +19,7 @@ import {MatIconModule} from "@angular/material/icon";
   styleUrls: ['./forms-demo.component.css']
 })
 export class FormsDemoComponent implements OnInit {
-  currentCategory: Category = new Category(-1, '', Language.English, Language.Hebrew)
+  currentCategory: Category = new Category(-1, '',  new Date())
   constructor(private categoryService: CategoryService, private router: Router) {}
   @Input()idString?:string
 
