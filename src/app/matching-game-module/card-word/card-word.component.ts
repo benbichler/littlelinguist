@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Category } from '../../shared/model/category';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
@@ -13,12 +13,22 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './card-word.component.html',
   styleUrl: './card-word.component.css'
 })
-export class CardWordComponent {
+export class CardWordComponent implements OnInit {
 
   @Input()  word? : string;
   @Input() status?: WordStatus;
+  @Output() wordSelectedEvent = new EventEmitter<string>;
+
+  ngOnInit(): void {
 
 
+
+    }
+
+    wordClicked(){
+      this.wordSelectedEvent.emit(this.word);
+
+    }
   }
 
 

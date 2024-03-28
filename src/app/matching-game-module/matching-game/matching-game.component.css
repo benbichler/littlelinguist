@@ -32,3 +32,14 @@
   margin-bottom: 10px;
   width: 200px;
 }
+
+
+.selected-word {
+  color: blue;
+}
+.matched-word {
+color: gray
+}
+.normal-word {
+  color:black;
+}

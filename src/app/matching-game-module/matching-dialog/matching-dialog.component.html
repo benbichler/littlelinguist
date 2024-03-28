@@ -1,7 +1,9 @@
-<h1 mat-dialog-title>Message</h1>
-<div mat-dialog-content>
-  <p>{{ data.message }}</p>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onClose()">Close</button>
+<h1 mat-dialog-title class="dialog-title">{{ data.title }}</h1>
+<div class="big card">
+    <div mat-dialog-content class="dialog-content">
+      <p class="dialog-text">{{ data.message }}</p>
+    </div>
+    <div mat-dialog-actions class="dialog-actions" align="end">
+      <button mat-button (click)="onClose()">{{ data.buttonText }}</button>
+    </div>
 </div>

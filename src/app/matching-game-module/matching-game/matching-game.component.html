@@ -5,15 +5,23 @@
   <h1 class="title">Matching Game - {{ currentCategory?.name }}</h1>
 </div>
 
-<div class="word-list">
+<div class="word-list" *ngIf="showNotEnoughWords; else notEnoughWords">
   <div class="english-column">
-    <mat-card *ngFor="let word of shuffledEnglishWords" class="word-card">
-      <app-card-word [word]="word"></app-card-word>
+    <mat-card *ngFor="let word of shuffledEnglishWords; let i = index" class="word-card">
+      <app-card-word [word]="word" [status]="englishWordStatus[i]" (wordSelectedEvent)="handleWordClicked($event)"></app-card-word>
     </mat-card>
   </div>
   <div class="hebrew-column">
-    <mat-card *ngFor="let word of shuffledHebrewWords" class="word-card">
-      <app-card-word [word]="word"></app-card-word>
+    <mat-card *ngFor="let word of shuffledHebrewWords let i = index"  class="word-card">
+      <app-card-word [word]="word" [status]="hebrewWordStatus[i]" (wordSelectedEvent)="handleWordClicked($event)"></app-card-word>
     </mat-card>
   </div>
 </div>
+<ng-template #notEnoughWords> 
+<div>
+  <div>
+    Not enough words for this category.
+  </div>
+  <a [routerLink]="['/cards']">Back to category selection.</a>
+</div> 
+</ng-template>

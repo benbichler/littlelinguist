@@ -1,3 +1,16 @@
 .word-content{
     color: white;
 }
+
+.selected{
+ color: blue;
+}
+
+.disabled{
+color: gray;
+
+}
+
+.normal{
+    color: white;
+}
