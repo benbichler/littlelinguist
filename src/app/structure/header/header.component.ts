@@ -17,14 +17,14 @@ export class HeaderComponent {
   constructor(private router: Router) {}
 
   navigateHome() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/cards']);
   }
 
   navigateGame() {
     this.router.navigate(['/game']);
   }
 
-  showCards() {
-    this.router.navigate(['/cards'])
+  showDashboard(){
+    this.router.navigate([''])
   }
 }

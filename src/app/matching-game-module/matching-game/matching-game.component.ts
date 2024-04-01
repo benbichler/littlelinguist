@@ -110,7 +110,9 @@ handleWordClicked(word: string) {
   }
   openDialog(title: string, message: string, buttonText: string) {
     this.dialog.open(MatchingDialogComponent, {
-      data: { title, message, buttonText }
+      data: { title, message, buttonText },
+      width: '50%',  // You can use pixel values or percentages
+      height: 'auto',  // 'auto' adjusts the height based on content, or you can specify a value
     });
   }
   

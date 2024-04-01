@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {CategoryService} from '../services/category.service';
-import {Category} from '../shared/model/category';
+import {CategoryService} from '../../services/category.service';
+import {Category} from '../../shared/model/category';
 import {FormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -8,8 +8,8 @@ import {MatInputModule} from "@angular/material/input";
 import {NgForOf, NgIf} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSelectModule} from "@angular/material/select";
-import { GameInformationService } from '../services/game-information.service';
-import { GameProfile } from '../shared/model/gameprofile';
+import { GameInformationService } from '../../services/game-information.service';
+import { GameProfile } from '../../shared/model/gameprofile';
 
 @Component({
   selector: 'app-game-match',

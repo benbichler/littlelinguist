@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CategoryService } from '../services/category.service';
-import { Category } from '../shared/model/category';
+import { CategoryService } from '../../services/category.service';
+import { Category } from '../../shared/model/category';
 import {FormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {MatFormFieldModule} from "@angular/material/form-field";
