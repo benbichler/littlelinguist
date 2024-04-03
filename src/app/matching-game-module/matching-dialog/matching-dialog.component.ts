@@ -1,9 +1,10 @@
 import { Component, Inject } from '@angular/core';
+import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 @Component({
   selector: 'app-matching-dialog',
   standalone: true,
-  imports: [MatDialogModule,],
+  imports: [MatDialogModule, MatButtonModule],
   templateUrl: './matching-dialog.component.html',
   styleUrl: './matching-dialog.component.css'
 })

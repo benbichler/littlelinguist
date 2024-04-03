@@ -34,16 +34,12 @@ export class CategoryViewComponent implements OnInit {
     this.selectedCategory = this.categories.find(category => category.id === +this.selectedCategoryId);
   }
   
-  startGame(id: number, name: string): void {
+  startGame(id: number): void {
     const dialogRef = this.dialog.open(CategoryDialogComponent, {
-      data: name
+      data: id
     });
 
-    dialogRef.afterClosed().subscribe(confirmed => {
-      if (confirmed) {
-        this.categoryService.setCurrentCategoryId(id.toString());
-        this.router.navigate([`/matchingame/${id}`]);
-      }
-    })
+    }
 }
-}
+
+// routerLink - to

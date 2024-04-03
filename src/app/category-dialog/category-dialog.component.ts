@@ -11,13 +11,14 @@ import { GameInformationService } from '../services/game-information.service';
 import { GameDifficulty } from '../shared/model/gamedifficulty';
 import { FormsModule } from '@angular/forms'; 
 import { MatDialogModule } from '@angular/material/dialog';
+import { CategoryViewComponent } from '../category-view/category-view.component';
 
 
 
 @Component({
   selector: 'app-category-dialog',
   standalone: true,
-  imports: [MatButtonModule, MatSelectModule, CommonModule, FormsModule, MatDialogModule],
+  imports: [MatButtonModule, MatSelectModule, CommonModule, FormsModule, MatDialogModule, RouterModule],
   templateUrl: './category-dialog.component.html',
   styleUrl: './category-dialog.component.css'
 })
@@ -30,22 +31,13 @@ export class CategoryDialogComponent {
 
 
   constructor(
-    public dialogRef: MatDialogRef<CategoryDialogComponent>,
-    private dialog: MatDialog,
     private gameInformationService: GameInformationService,
-    private router: Router
+    public dialogRef: MatDialogRef<CategoryDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public id:number,
   ) {
+
     this.games = this.gameInformationService.list();
     console.log('Games:', this.games);
-  }
-
-  
-  closeDialog(): void {
-    this.dialogRef.close();
-  }
-
-  confirmSelection(): void {
-    this.dialogRef.close(true); 
   }
 }
 

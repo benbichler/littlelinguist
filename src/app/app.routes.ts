@@ -5,6 +5,7 @@ import { CategoryViewComponent } from './category-view/category-view.component';
 import { MatchingGameComponent } from './matching-game-module/matching-game/matching-game.component';
 import { ExplanationOnGameComponent } from './structure/explanation-on-game/explanation-on-game.component';
 import { DashboardViewComponent } from './dashboard-view/dashboard-view.component';
+import { ScrambledGameModuleComponent } from './scrambled-game-module/scrambled-game-module.component';
 
 export const routes: Routes = [
     {path: '', component:DashboardViewComponent},
@@ -13,5 +14,6 @@ export const routes: Routes = [
     {path: 'categorynew', component: FormsDemoComponent},
     {path: 'matchingame/:idString', component: MatchingGameComponent},
     {path: 'cards', component: CategoryViewComponent},
-    {path: 'explanation', component:ExplanationOnGameComponent}
+    {path: 'explanation', component:ExplanationOnGameComponent},
+    {path: 'scrambledgame/:idString', component:ScrambledGameModuleComponent},
 ];

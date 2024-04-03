@@ -33,6 +33,7 @@ export class MatchingGameComponent {
   showNotEnoughWords?: boolean;
   englishWordStatus: WordStatus[] = [];
   hebrewWordStatus: WordStatus[] = [];
+  private static readonly WORDS_PER_GAME = 5;
 
 
   ngOnInit(): void {
@@ -50,9 +51,8 @@ export class MatchingGameComponent {
     const tempWords = this.currentCategory.words.sort(() => Math.random() - 0.5).slice(0,5);
      this.shuffledEnglishWords = tempWords.map(word => word.origin).sort(() => Math.random() - 0.5);
      this.shuffledHebrewWords = tempWords.map(word => word.target).sort(() => Math.random() - 0.5);
-     this.englishWordStatus = Array(5).fill(WordStatus.Normal);
-     this.hebrewWordStatus = Array(5).fill(WordStatus.Normal);
-
+     this.englishWordStatus = Array(MatchingGameComponent.WORDS_PER_GAME).fill(WordStatus.Normal);
+     this.hebrewWordStatus = Array(MatchingGameComponent.WORDS_PER_GAME).fill(WordStatus.Normal);
     }
   }
  }
