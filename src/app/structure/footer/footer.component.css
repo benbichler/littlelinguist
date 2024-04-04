@@ -1,16 +1,15 @@
 /* footer.component.css */
 
-div {
-  display: flex;
-  justify-content: flex-end; /* Adjusted to "flex-end" for right alignment */
-  background-color: #f0f0f0; /* Adjust the background color as needed */
-  padding: 10px;
-  position: fixed;
-  bottom: 0;
-  width: 99%;
+.toolbar-icon {
+  position: fixed; /* Keeps the icon fixed during scrolling */
+  right: 0; /* Aligns the icon to the right */
+  bottom: 0; 
+  cursor: pointer; /* Changes the cursor to a pointer when hovering over the icon */
 }
 
+
 .mat-icon {
-  font-size: 24px; /* Adjust the icon size as needed */
-  color: #333; /* Adjust the icon color as needed */
+  font-size: 24px; 
+  color: #333; 
+  cursor: pointer;
 }

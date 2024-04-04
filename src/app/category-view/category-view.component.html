@@ -1,6 +1,8 @@
+ <h1 class="title">Let's Play</h1>
+ <h1 class="chooseCategory">Choose your category and dive in!</h1>
+<!-- <app-show-points></app-show-points> -->
 
 
-    <h1 class="title">Let's Play</h1>
     <div class="categories-container">
         <div *ngFor="let c of categories" class="category-card">
             <app-category-card [category]="c" button (click)="startGame(c.id)"></app-category-card>

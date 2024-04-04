@@ -8,12 +8,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { CategoryDialogComponent } from '../category-dialog/category-dialog.component';
 import { FormsModule } from '@angular/forms';
-
+import { ShowPointsComponent } from '../show-points/show-points.component';
 
 @Component({
   selector: 'app-category-view',
   standalone: true,
-  imports: [CategoryCardComponent, CommonModule, RouterModule, MatButtonModule, CategoryDialogComponent, FormsModule],
+  imports: [ShowPointsComponent, CategoryCardComponent, CommonModule, RouterModule, MatButtonModule, CategoryDialogComponent, FormsModule],
   templateUrl: './category-view.component.html',
   styleUrl: './category-view.component.css'
 })

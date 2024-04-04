@@ -32,8 +32,9 @@
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
-
-    <button mat-raised-button color="warn" (click)="addNewCategory()">
-      Add
+<div class="createCatButton">
+    <button mat-raised-button color="primary" (click)="addNewCategory()">
+       + Create Category
     </button>
   </div>
+</div>

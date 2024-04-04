@@ -51,7 +51,7 @@ export class FormsDemoComponent implements OnInit {
   hasAtLeastOne() {
     return this.currentCategory.words.length !== 0
   }
-  onSubmitRegistration() {
+  onSubmitRegistration() : void {
     console.log("Form submitted!");
     if(this.idString) { 
       this.categoryService.update(this.currentCategory);

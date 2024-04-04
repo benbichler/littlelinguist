@@ -19,11 +19,6 @@ export class HeaderComponent {
   navigateHome() {
     this.router.navigate(['/cards']);
   }
-
-  navigateGame() {
-    this.router.navigate(['/game']);
-  }
-
   showDashboard(){
     this.router.navigate([''])
   }

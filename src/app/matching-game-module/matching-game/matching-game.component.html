@@ -3,6 +3,7 @@
     <app-exit-game-button></app-exit-game-button>
   </div>
   <h1 class="title">Matching Game - {{ currentCategory?.name }}</h1>
+  <app-show-points [totalPointsEarned]="totalPoints"></app-show-points>
 </div>
 
 <div class="word-list" *ngIf="showNotEnoughWords; else notEnoughWords">

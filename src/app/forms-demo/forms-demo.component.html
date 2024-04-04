@@ -1,45 +1,41 @@
 <form #registrationForm="ngForm" (ngSubmit)="onSubmitRegistration()">
-    <div>
+  <div class="category-container">
+    <mat-form-field>
       <mat-label>Category Name:</mat-label>
-      <mat-form-field>
-        <input matInput [(ngModel)]="currentCategory.name" name="name" required>
-      </mat-form-field>
-    </div>
-    <div>
+      <input matInput [(ngModel)]="currentCategory.name" name="name" required>
+    </mat-form-field>
+
+    <mat-form-field>
       <mat-label>Source Language:</mat-label>
-      <mat-form-field>
-        <input matInput [(ngModel)]="currentCategory.origin" name="origin" required disabled>
-      </mat-form-field>
-    </div>
-    <div>
+      <input matInput [(ngModel)]="currentCategory.origin" name="origin" required disabled>
+    </mat-form-field>
+
+    <mat-form-field>
       <mat-label>Target Language:</mat-label>
-      <mat-form-field>
-        <input matInput [(ngModel)]="currentCategory.target" name="target" required disabled>
-      </mat-form-field>
-    </div>
+      <input matInput [(ngModel)]="currentCategory.target" name="target" required disabled>
+    </mat-form-field>
+  
+    <button mat-raised-button type="button" (click)="addNewWord()" color="primary">+ Add new word</button>
+  </div>
 
-    <div *ngFor="let word of currentCategory.words; let i = index">
-      <mat-form-field>
-        <mat-label>Origin</mat-label>
-        <input matInput [(ngModel)]="word.origin" name="wordOrigin{{i}}" pattern="[a-zA-Z\s]*" #originInput="ngModel" required>
-        <mat-error *ngIf="originInput.invalid">{{ getErrorMessage(originInput) }}</mat-error>
-      </mat-form-field>
+  <div *ngFor="let word of currentCategory.words; let i = index" class="word-container">
+    <mat-form-field>
+      <mat-label>Origin</mat-label>
+      <input matInput [(ngModel)]="word.origin" name="wordOrigin{{i}}" required>
+    </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Target</mat-label>
-        <input matInput [(ngModel)]="word.target" name="wordTarget{{i}}" pattern="[\u0590-\u05ea]*" required>
-      </mat-form-field>
+    <mat-form-field>
+      <mat-label>Target</mat-label>
+      <input matInput [(ngModel)]="word.target" name="wordTarget{{i}}" required>
+    </mat-form-field>
+   <button mat-icon-button (click)="deleteWord(i)"><mat-icon>delete</mat-icon></button>
+  </div>
 
-      <button mat-icon-button (click)="deleteWord(i)"><mat-icon>delete</mat-icon></button>
 
-    </div>
 
-    <div>
-      <button mat-raised-button type="button" (click)="addNewWord()">+ Add new word</button>
-    </div>
-
-    <div>
-      <button type="submit" mat-raised-button color="primary" [disabled]="registrationForm.invalid || registrationForm.pristine || !hasAtLeastOne()">
-        Save</button>
-    </div>
-  </form>
+  <div class="saveButton">
+    <button type="submit" mat-raised-button color="primary" [disabled]="registrationForm.invalid || registrationForm.pristine || !hasAtLeastOne()">
+      Save
+    </button>
+  </div>
+</form>

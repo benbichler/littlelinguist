@@ -8,7 +8,7 @@ import { DashboardViewComponent } from './dashboard-view/dashboard-view.componen
 import { ScrambledGameModuleComponent } from './scrambled-game-module/scrambled-game-module.component';
 
 export const routes: Routes = [
-    {path: '', component:DashboardViewComponent},
+    {path: '', component: DashboardViewComponent},
     {path: 'admin', component: CategoryListComponent},
     {path: 'category/:idString', component: FormsDemoComponent},
     {path: 'categorynew', component: FormsDemoComponent},

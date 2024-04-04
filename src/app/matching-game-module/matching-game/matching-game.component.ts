@@ -14,19 +14,21 @@ import { WordStatus } from '../shared/model/wordstatus';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatchingDialogComponent } from '../matching-dialog/matching-dialog.component';
-
+import { GamePointsService } from '../../services/game-points.service';
+import { GamePlayed } from '../../shared/model/gameplayed';
+import { ShowPointsComponent } from '../../show-points/show-points.component';
 
 @Component({
     selector: 'app-matching-game',
     standalone: true,
     templateUrl: './matching-game.component.html',
     styleUrl: './matching-game.component.css',
-    imports: [MatDialogModule, CardWordComponent, CommonModule, MatIconModule, MatFormFieldModule, MatCardModule, NgIf, NgForOf, RouterModule, ExitGameButtonComponent]
+    imports: [ShowPointsComponent, MatDialogModule, CardWordComponent, CommonModule, MatIconModule, MatFormFieldModule, MatCardModule, NgIf, NgForOf, RouterModule, ExitGameButtonComponent]
 })
 export class MatchingGameComponent {
 
 
-  constructor( private categoryService: CategoryService, private dialog: MatDialog, private router: Router){}
+  constructor( private categoryService: CategoryService, private dialog: MatDialog, private router: Router, private pointsService: GamePointsService){}
   currentCategory?: Category;
   shuffledEnglishWords: string[] = [];
   shuffledHebrewWords: string[] = [];
@@ -34,12 +36,17 @@ export class MatchingGameComponent {
   englishWordStatus: WordStatus[] = [];
   hebrewWordStatus: WordStatus[] = [];
   private static readonly WORDS_PER_GAME = 5;
+  totalPoints: number = 0;
+  totalCurrentGamePoints: number = 20;
+  totalSuccess: number = 0;
+  totalAttempts: number = 0;
 
 
   ngOnInit(): void {
     this.loadCurrentCategory();
 
 }
+
 
  private loadCurrentCategory(): void {
   const currentCategoryId = this.categoryService.getCurrentCategoryId();
@@ -73,10 +80,19 @@ handleWordClicked(word: string) {
           if(hebrewEnglishPair){
             this.englishWordStatus[englishWordIndex] = WordStatus.Disabled;
             this.hebrewWordStatus[currentIndexHebrewWordStatus] = WordStatus.Disabled;
+            this.totalPoints+= this.totalCurrentGamePoints;
+            this.totalSuccess++;
+            this.checkIfAllWordsMarkedDisabled();
+            if(this.isGameOver()){
+              this.pointsService.addGamePlayed(new GamePlayed(this.currentCategory!.id, 1, this.totalPoints))
+            }
             this.openDialog('Success!', 'Great Job!', 'Continue');
           } else {
+            this.totalAttempts++;
+            this.totalPoints -= 5;
             this.englishWordStatus[englishWordIndex] = WordStatus.Selected;
             this.openDialog('Incorrect', 'Incorrect, give it another try!', 'GOT IT');
+
           }
         } else{ 
           this.englishWordStatus[englishWordIndex] = WordStatus.Selected;
@@ -96,28 +112,53 @@ handleWordClicked(word: string) {
           if(englishHebrewPair){
             this.hebrewWordStatus[hebrewWordIndex] = WordStatus.Disabled;
             this.englishWordStatus[currentIndexEnglishWordStatus] = WordStatus.Disabled;
+            this.totalPoints+= this.totalCurrentGamePoints;
+            this.totalSuccess++;
+            this.checkIfAllWordsMarkedDisabled();
+            if(this.isGameOver()){
+              this.pointsService.addGamePlayed(new GamePlayed(this.currentCategory!.id, 1, this.totalPoints))
+            }
             this.openDialog('Success!', 'Great Job!', 'Continue');
+            }
           } else {
             this.hebrewWordStatus[hebrewWordIndex] = WordStatus.Selected;
             this.openDialog('Incorrect', 'Incorrect, give it another try!', 'GOT IT');
+            this.totalAttempts++;
+            this.totalPoints -= 5 ;
                  }
         } else{ 
           this.hebrewWordStatus[hebrewWordIndex] = WordStatus.Selected;
         }
       }
     }
-
-  }
-  openDialog(title: string, message: string, buttonText: string) {
-    this.dialog.open(MatchingDialogComponent, {
-      data: { title, message, buttonText },
-      width: '50%',  // You can use pixel values or percentages
-      height: 'auto',  // 'auto' adjusts the height based on content, or you can specify a value
-    });
-  }
   
+  
+    openDialog(title: string, message: string, buttonText: string) {
+      return this.dialog.open(MatchingDialogComponent, {
+          data: { title, message, buttonText },
+          width: '50%',
+          height: 'auto',
+      });
+  }
+
+  
+  isGameOver(): boolean {
+    return this.checkIfAllWordsMarkedDisabled();
+  }
+
+  checkIfAllWordsMarkedDisabled () : boolean {
+    for (let i = 0; i < this.englishWordStatus.length; i++) {
+      if (this.englishWordStatus[i] !== WordStatus.Disabled || this.hebrewWordStatus[i] !== WordStatus.Disabled) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+
 exit(){
   this.router.navigate(['/cards']);}
 }
+
 
 
