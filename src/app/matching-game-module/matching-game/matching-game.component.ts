@@ -19,13 +19,14 @@ import { GamePlayed } from '../../shared/model/gameplayed';
 import { ShowPointsComponent } from '../../show-points/show-points.component';
 import { TranslatedWord } from '../../shared/model/translateword';
 import { MatButtonModule } from '@angular/material/button';
+import { GameSummaryComponent } from "../../game-summary/game-summary.component";
 
 @Component({
     selector: 'app-matching-game',
     standalone: true,
     templateUrl: './matching-game.component.html',
     styleUrl: './matching-game.component.css',
-    imports: [MatButtonModule, ShowPointsComponent, MatDialogModule, CardWordComponent, CommonModule, MatIconModule, MatFormFieldModule, MatCardModule, NgIf, NgForOf, RouterModule, ExitGameButtonComponent]
+    imports: [MatButtonModule, ShowPointsComponent, MatDialogModule, CardWordComponent, CommonModule, MatIconModule, MatFormFieldModule, MatCardModule, NgIf, NgForOf, RouterModule, ExitGameButtonComponent, GameSummaryComponent]
 })
 export class MatchingGameComponent {
 
@@ -65,16 +66,17 @@ private loadCurrentCategory(): void {
 }
 
 private processCategoryWords(): void {
+  console.log('processCategoryWords called');
+
   // Check explicitly if this.currentCategory is not undefined before proceeding.
   if (this.currentCategory !== undefined && this.hasEnoughWords(this.currentCategory)) {
-    console.log('Initializing game words for:', this.currentCategory);
+    console.log('Enough words, initializing game...');
     this.initializeGameWords(this.currentCategory);
   } else {
-    console.log('Not enough words or category does not exist');
-    this.showMessageAtEnd = 'The category does not exist or has insufficient words';
+    console.log('Not enough words, setting message...');
+    this.showMessageAtEnd = 'This category does not have enough words to start the game.';
   }
 }
-
 
 private hasEnoughWords(category: Category): boolean {
   this.showDisWords = category.words.length < MatchingGameComponent.WORDS_PER_GAME;

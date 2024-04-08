@@ -21,9 +21,13 @@
     </div>
   </div>
 
-  <div class="handleMessageSit" *ngIf="showMessageAtEnd">
+  <div *ngIf="showMessageAtEnd" class="handleMessageSit">
     {{ showMessageAtEnd }}
     <br>
     <button mat-raised-button color="primary" [routerLink]="['/cards']">Choose a Different Category</button>
   </div>
+</div>
+
+<div *ngIf="isGameOver()">
+<app-game-summary [currentCategoryName]="currentCategory?.name" [chosenWords]="chosenWordsEnglish" [numberOfAttempts]="totalAttempts" [totalPointsEarned]="totalPoints"></app-game-summary>
 </div>

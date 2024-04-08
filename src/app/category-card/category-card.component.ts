@@ -14,7 +14,5 @@ export class CategoryCardComponent {
 
 
   @Input()  category? : Category;
-  ngOnChanges() {
-    console.log('Received category:', this.category);
-  }
+  
 }
