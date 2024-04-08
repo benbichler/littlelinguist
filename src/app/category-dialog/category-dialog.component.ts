@@ -37,7 +37,6 @@ export class CategoryDialogComponent {
   ) {
 
     this.games = this.gameInformationService.list();
-    console.log('Games:', this.games);
   }
 }
 
