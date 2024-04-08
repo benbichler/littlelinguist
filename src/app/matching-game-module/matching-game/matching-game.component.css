@@ -1,45 +1,51 @@
+.title {  
+  text-align: center;
+  align-items: center;
+}
+
+.game-content {
+  display: flex;
+  justify-content: center;
+}
+
+.word-columns {
+  display: flex;
+  justify-content: center;
+}
+
+.column {
+  margin: 0 10px;
+}
+
+app-card-word {
+  display: block;
+  width: 200px !important; /* Increased width for larger size */
+  height: 120px !important; /* Increased height for larger size */
+}
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  position: relative;
-}
-
-.title {
-  font-size: 24px;
-  width: 100%;
-  text-align: center;
+  padding: 0 20px; 
 }
 
 .exit-button {
-  position: absolute;
-  left: 0;
+  margin-right: auto; 
 }
 
-.word-list {
+.points-container {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  margin-left: auto; 
 }
 
-.english-column,
-.hebrew-column {
-  margin: 0 10px;
+mat-icon {
+  font-size: 1.5em;
+  margin-right: 8px; 
 }
 
-.word-card {
-  margin-bottom: 10px;
-  width: 200px;
-}
-
-
-.selected-word {
-  color: blue;
-}
-.matched-word {
-color: gray
-}
-.normal-word {
-  color:black;
+.points {
+  font-weight: bold;
+  font-size: 1.5em;
 }

@@ -2,11 +2,10 @@
     <div class="card-content">
         <mat-card>
             <mat-card-content>
-                <div class="word-content" (click)="wordClicked()" [ngClass]="{
-                    'disabled': status === 'disabled',
-                    'selected': status === 'selected',
-                    'normal': status === 'normal'
-                  }">
+                <div class="word-content" [ngClass]="{
+                    'disabled': status === WordStatus.Disabled,
+                    'selected': status === WordStatus.Selected,
+                      }">
                     {{ word }}
                 </div>
             </mat-card-content>

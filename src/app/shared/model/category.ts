@@ -24,12 +24,10 @@ export class Category {
 
     }
     isUpdatedWithinLastWeek(): boolean {
-        console.log(this.lastModifiedDate)
         const fixedDate = new Date(this.lastModifiedDate);
         const oneWeekInMilliseconds = 7 * 24 * 60 * 60 * 1000
         const currentDate = new Date();
         const diff = currentDate.getTime() - fixedDate.getTime();
-        console.log(diff)
         return diff < oneWeekInMilliseconds;
     }
 }

@@ -9,7 +9,6 @@ export class CategoryService {
   private readonly NEXT_ID_KEY = 'nextId';
   private readonly CATEGORIES_KEY = 'categories';
   private idStringKey = 'currentCategoryId';
-  private categoriesKey = 'categories';
   
   private setCategories(allCategories: Map<number, Category>) : void {
     localStorage.setItem(this.CATEGORIES_KEY, JSON.stringify(Array.from(allCategories.values())));
@@ -79,10 +78,14 @@ export class CategoryService {
   }
 
   setCurrentCategoryId(idString: string): void{
-    return localStorage.setItem(this.idStringKey, idString);
+    console.log(`Setting current category ID: ${idString}`);
+    localStorage.setItem(this.idStringKey, idString);
   }
 
-  getCurrentCategoryId() : string | null {
-    return localStorage.getItem(this.idStringKey);
+  getCurrentCategoryId(): string | null {
+    let id = localStorage.getItem(this.idStringKey);
+    console.log(`Getting current category ID: ${id}`);
+    return id;
   }
 }
+

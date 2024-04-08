@@ -12,8 +12,8 @@ export const routes: Routes = [
     {path: 'admin', component: CategoryListComponent},
     {path: 'category/:idString', component: FormsDemoComponent},
     {path: 'categorynew', component: FormsDemoComponent},
-    {path: 'matchingame/:idString', component: MatchingGameComponent},
+    {path: 'matchingame/:currentCategoryId', component: MatchingGameComponent},
     {path: 'cards', component: CategoryViewComponent},
     {path: 'explanation', component:ExplanationOnGameComponent},
-    {path: 'scrambledgame/:idString', component:ScrambledGameModuleComponent},
+    {path: 'scrambledgame/:currentCategoryId', component:ScrambledGameModuleComponent},
 ];

@@ -16,11 +16,7 @@
 }
 
 .category-card {
-    margin: 10px;
-    border-radius: 10px;
-    overflow: hidden;
-    background-color: #ffffff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
 }
 
 .category-card:hover {
@@ -31,3 +27,7 @@
 .chooseCategory{
     text-align: center;
 }
+
+mat-card {
+    background-color: #333; /* or any color that fits your design */
+  }

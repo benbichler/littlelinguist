@@ -42,4 +42,3 @@ export class CategoryViewComponent implements OnInit {
     }
 }
 
-// routerLink - to
