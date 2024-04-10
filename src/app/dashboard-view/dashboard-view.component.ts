@@ -5,29 +5,25 @@ import { GamePointsService } from '../services/game-points.service';
 @Component({
   selector: 'app-dashboard-view',
   standalone: true,
-  imports: [MatCardModule,],
+  imports: [MatCardModule],
   templateUrl: './dashboard-view.component.html',
-  styleUrl: './dashboard-view.component.css'
+  styleUrl: './dashboard-view.component.css',
 })
 export class DashboardViewComponent implements OnInit {
-
   TotalPointsInAllGames: number = 0;
   gamesPlayedOverall: GamePlayed[] = [];
 
-  constructor (private gamePointsService: GamePointsService){}
+  constructor(private gamePointsService: GamePointsService) {}
 
   ngOnInit(): void {
     this.gamesPlayedOverall = this.gamePointsService.list();
     this.calculateTotalPoints();
+  }
 
-}
-
-calculateTotalPoints() : void{
-  const pointsInGames = this.gamePointsService.list();
-  for (const pointInOneGame of pointsInGames){
-    this.TotalPointsInAllGames += pointInOneGame.amountOfPoints;
-
-
+  calculateTotalPoints(): void {
+    const pointsInGames = this.gamePointsService.list();
+    for (const pointInOneGame of pointsInGames) {
+      this.TotalPointsInAllGames += pointInOneGame.amountOfPoints;
     }
   }
 }

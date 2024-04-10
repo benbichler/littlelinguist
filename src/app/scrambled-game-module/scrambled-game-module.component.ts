@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './scrambled-game-module.component.html',
-  styleUrl: './scrambled-game-module.component.css'
+  styleUrl: './scrambled-game-module.component.css',
 })
-export class ScrambledGameModuleComponent {
-
-}
+export class ScrambledGameModuleComponent {}

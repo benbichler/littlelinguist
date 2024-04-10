@@ -1,25 +1,34 @@
-import {Component, OnInit} from '@angular/core';
-import {CategoryService} from '../../services/category.service';
-import {Category} from '../../shared/model/category';
-import {FormsModule} from "@angular/forms";
-import {MatButtonModule} from "@angular/material/button";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
-import {NgForOf, NgIf} from "@angular/common";
-import {MatIconModule} from "@angular/material/icon";
-import {MatSelectModule} from "@angular/material/select";
+import { Component, OnInit } from '@angular/core';
+import { CategoryService } from '../../services/category.service';
+import { Category } from '../../shared/model/category';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { NgForOf, NgIf } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 import { GameInformationService } from '../../services/game-information.service';
 import { GameProfile } from '../../shared/model/gameprofile';
 
 @Component({
   selector: 'app-game-match',
   standalone: true,
-  imports: [FormsModule, MatButtonModule, MatFormFieldModule, MatInputModule, NgForOf, NgIf, MatIconModule, MatSelectModule],
+  imports: [
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    NgForOf,
+    NgIf,
+    MatIconModule,
+    MatSelectModule,
+  ],
   templateUrl: './game-match.component.html',
-  styleUrl: './game-match.component.css'
+  styleUrl: './game-match.component.css',
 })
 export class GameComponent implements OnInit {
-  games: GameProfile [] = []
+  games: GameProfile[] = [];
   currentGame: GameProfile | undefined;
   currentCategory?: Category;
   fixedWordIndex: number = 0;
@@ -27,35 +36,40 @@ export class GameComponent implements OnInit {
   answerCorrect?: boolean;
   show: boolean = false;
 
-
   constructor(
-    private categoryService: CategoryService, private gameInformationService: GameInformationService
-  ) {
-  }
+    private categoryService: CategoryService,
+    private gameInformationService: GameInformationService,
+  ) {}
 
   ngOnInit(): void {
     this.loadCurrentCategory();
     this.changeWord();
-    this.show = false
+    this.show = false;
     this.games = this.gameInformationService.list();
     if (this.games.length > 0) {
-      this.currentGame = this.games[0]; 
+      this.currentGame = this.games[0];
     }
   }
 
   loadCurrentCategory(): void {
     const currentCategoryId = this.categoryService.getCurrentCategoryId();
     if (currentCategoryId) {
-      this.currentCategory = this.categoryService.list().find(category => category.id === +currentCategoryId);
+      this.currentCategory = this.categoryService
+        .list()
+        .find((category) => category.id === +currentCategoryId);
     }
   }
 
   checkAnswers(): void {
     this.show = false;
-    const correctTranslation = this.currentCategory?.words[this.fixedWordIndex].target;
-    if (correctTranslation && this.selectedOptions.includes(correctTranslation)) {
+    const correctTranslation =
+      this.currentCategory?.words[this.fixedWordIndex].target;
+    if (
+      correctTranslation &&
+      this.selectedOptions.includes(correctTranslation)
+    ) {
       this.answerCorrect = true;
-      this.changeWord()
+      this.changeWord();
     } else {
       this.answerCorrect = false;
     }
@@ -65,11 +79,13 @@ export class GameComponent implements OnInit {
   changeWord(): void {
     this.show = false;
     if (this.currentCategory && this.currentCategory.words.length > 0) {
-      this.fixedWordIndex = Math.floor(Math.random() * this.currentCategory.words.length);
+      this.fixedWordIndex = Math.floor(
+        Math.random() * this.currentCategory.words.length,
+      );
     }
   }
 
   showWord(): void {
-    this.show = !this.show
+    this.show = !this.show;
   }
 }

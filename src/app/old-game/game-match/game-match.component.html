@@ -1,9 +1,16 @@
 <div *ngIf="currentCategory">
-  <h3>Match the translations for: "{{ currentCategory.words[fixedWordIndex].origin }}"</h3>
+  <h3>
+    Match the translations for: "{{
+      currentCategory.words[fixedWordIndex].origin
+    }}"
+  </h3>
   <mat-form-field appearance="fill">
     <mat-label>Select translations</mat-label>
     <mat-select [(value)]="selectedOptions">
-      <mat-option *ngFor="let word of currentCategory.words" [value]="word.target">
+      <mat-option
+        *ngFor="let word of currentCategory.words"
+        [value]="word.target"
+      >
         {{ word.target }}
       </mat-option>
     </mat-select>
@@ -11,14 +18,20 @@
 
   <button (click)="changeWord()" mat-raised-button>Change Word</button>
   <button (click)="checkAnswers()" mat-raised-button>Check Answers</button>
-  <div *ngIf="answerCorrect === true" style="color: green; font-size: larger; margin-top: 20px;">
+  <div
+    *ngIf="answerCorrect === true"
+    style="color: green; font-size: larger; margin-top: 20px"
+  >
     <strong>Correct!</strong>
   </div>
-  <div *ngIf="answerCorrect === false" style="color: red; font-size: larger; margin-top: 20px;">
+  <div
+    *ngIf="answerCorrect === false"
+    style="color: red; font-size: larger; margin-top: 20px"
+  >
     <strong>Incorrect, try again.</strong>
     <button (click)="showWord()" mat-raised-button>Show</button>
   </div>
-  <div *ngIf="show" style="font-size: larger; margin-top: 20px;">
+  <div *ngIf="show" style="font-size: larger; margin-top: 20px">
     <strong>{{ currentCategory.words[fixedWordIndex].target }}</strong>
   </div>
 </div>

@@ -6,13 +6,12 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [MatIconModule],
   templateUrl: './explanation-on-game.component.html',
-  styleUrl: './explanation-on-game.component.css'
+  styleUrl: './explanation-on-game.component.css',
 })
 export class ExplanationOnGameComponent {
-  constructor (private router: Router) { }
+  constructor(private router: Router) {}
 
   moveToHome(): void {
     this.router.navigate(['/cards']);
   }
-
 }

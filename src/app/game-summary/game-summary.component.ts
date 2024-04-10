@@ -6,15 +6,13 @@ import { NgFor } from '@angular/common';
   standalone: true,
   imports: [NgFor],
   templateUrl: './game-summary.component.html',
-  styleUrl: './game-summary.component.css'
+  styleUrl: './game-summary.component.css',
 })
-export class GameSummaryComponent implements OnInit{
-
-  ngOnInit(): void { }
+export class GameSummaryComponent implements OnInit {
+  ngOnInit(): void {}
 
   @Input() currentCategoryName?: string;
   @Input() chosenWords: TranslatedWord[] = [];
   @Input() numberOfAttempts: number = 0;
   @Input() totalPointsEarned: number = 0;
-
 }

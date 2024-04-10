@@ -1,52 +1,49 @@
 .game-summary {
-    font-family: 'Arial', sans-serif;
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  font-family: "Arial", sans-serif;
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .game-summary h1 {
-    text-align: center;
-    color: #333;
+  text-align: center;
+  color: #333;
 }
 
 .summary-body {
-    margin-top: 20px;
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    font-size: 16px;
-    text-align: center;
-    
-    
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  text-align: center;
 }
 
-    
-
 .translated-words {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .word-pair {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: #fff;
-    border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
 }
 
-.source-word, .target-word {
-    padding: 5px;
-    color: #555;
+.source-word,
+.target-word {
+  padding: 5px;
+  color: #555;
 }
 
 /* Last child border reset */
 .word-pair:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 /* If you prefer the words to be listed vertically, comment out the .word-pair display:flex; and uncomment below */

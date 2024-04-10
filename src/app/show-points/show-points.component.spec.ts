@@ -8,10 +8,9 @@ describe('ShowPointsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ShowPointsComponent]
-    })
-    .compileComponents();
-    
+      imports: [ShowPointsComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ShowPointsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

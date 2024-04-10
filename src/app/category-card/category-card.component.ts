@@ -8,11 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   imports: [MatCardModule, CommonModule, MatIconModule],
   templateUrl: './category-card.component.html',
-  styleUrl: './category-card.component.css'
+  styleUrl: './category-card.component.css',
 })
 export class CategoryCardComponent {
-
-
-  @Input()  category? : Category;
-  
+  @Input() category?: Category;
 }

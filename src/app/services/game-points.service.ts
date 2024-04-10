@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 import { GamePlayed } from '../shared/model/gameplayed';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GamePointsService {
-  
   private readonly GAME_PLAYED_KEY = 'gamePlayed';
   gamePointsList: GamePlayed[] = [];
 
-  constructor() { 
+  constructor() {
     const storedData = localStorage.getItem(this.GAME_PLAYED_KEY);
     if (storedData) {
       this.gamePointsList = JSON.parse(storedData);
@@ -20,8 +19,11 @@ export class GamePointsService {
     return this.gamePointsList;
   }
 
-  addGamePlayed(gamePlayed: GamePlayed) { 
+  addGamePlayed(gamePlayed: GamePlayed) {
     this.gamePointsList.push(gamePlayed);
-    localStorage.setItem(this.GAME_PLAYED_KEY, JSON.stringify(this.gamePointsList));
-  }  
+    localStorage.setItem(
+      this.GAME_PLAYED_KEY,
+      JSON.stringify(this.gamePointsList),
+    );
+  }
 }

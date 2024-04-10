@@ -1,20 +1,19 @@
 /* Ensures the toolbar contents are flexibly laid out */
 .mat-toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 /* Centers the title and allows it to take up maximum available space */
 .toolbar-center-title {
-    flex-grow: 1;
-    text-align: center;
-    cursor: pointer;
+  flex-grow: 1;
+  text-align: center;
+  cursor: pointer;
 }
 
 /* Aligns icons to the right */
 .toolbar-icons {
-    display: flex;
-    justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
 }
-

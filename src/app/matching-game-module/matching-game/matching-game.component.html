@@ -8,26 +8,40 @@
   </div>
 </div>
 
-
 <div *ngIf="!isGameOver()" class="game-content">
   <div class="word-columns">
     <div class="column english-words">
-      <app-card-word *ngFor="let word of chosenWordsEnglish; let i = index" [word]="word.origin" 
-                     [status]="englishWordStatus[i]" (click)="handleWordClicked(i); isGameOver()"></app-card-word>
+      <app-card-word
+        *ngFor="let word of chosenWordsEnglish; let i = index"
+        [word]="word.origin"
+        [status]="englishWordStatus[i]"
+        (click)="handleWordClicked(i); isGameOver()"
+      ></app-card-word>
     </div>
     <div class="column hebrew-words">
-      <app-card-word *ngFor="let word of chosenWordsHebrew; let i = index" [word]="word" 
-                     [status]="hebrewWordStatus[i]" (click)="handleHebrewWordClicked(i); isGameOver()"></app-card-word>
+      <app-card-word
+        *ngFor="let word of chosenWordsHebrew; let i = index"
+        [word]="word"
+        [status]="hebrewWordStatus[i]"
+        (click)="handleHebrewWordClicked(i); isGameOver()"
+      ></app-card-word>
     </div>
   </div>
 
   <div *ngIf="showMessageAtEnd" class="handleMessageSit">
     {{ showMessageAtEnd }}
-    <br>
-    <button mat-raised-button color="primary" [routerLink]="['/cards']">Choose a Different Category</button>
+    <br />
+    <button mat-raised-button color="primary" [routerLink]="['/cards']">
+      Choose a Different Category
+    </button>
   </div>
 </div>
 
 <div *ngIf="isGameOver()">
-<app-game-summary [currentCategoryName]="currentCategory?.name" [chosenWords]="chosenWordsEnglish" [numberOfAttempts]="totalAttempts" [totalPointsEarned]="totalPoints"></app-game-summary>
+  <app-game-summary
+    [currentCategoryName]="currentCategory?.name"
+    [chosenWords]="chosenWordsEnglish"
+    [numberOfAttempts]="totalAttempts"
+    [totalPointsEarned]="totalPoints"
+  ></app-game-summary>
 </div>

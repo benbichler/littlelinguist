@@ -1,20 +1,20 @@
 .dialog-content {
-    padding: 20px;
+  padding: 20px;
 }
 
 .dialog-title {
-    margin: 0;
-    font-size: 1.2rem;
-    color:white
+  margin: 0;
+  font-size: 1.2rem;
+  color: white;
 }
 
 .game-select {
-    width: 100%;
+  width: 100%;
 }
-.dialog-text{
-    color:white;
+.dialog-text {
+  color: white;
 }
 .dialog-actions {
-    justify-content: flex-end;
-    padding: 10px 20px;
+  justify-content: flex-end;
+  padding: 10px 20px;
 }

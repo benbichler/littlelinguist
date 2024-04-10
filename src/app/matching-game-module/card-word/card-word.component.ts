@@ -5,19 +5,15 @@ import { CommonModule, NgClass } from '@angular/common';
 import { WordStatus } from '../shared/model/wordstatus';
 import { MatIconModule } from '@angular/material/icon';
 
-
 @Component({
   selector: 'app-card-word',
   standalone: true,
-  imports: [MatCardModule, NgClass ],
+  imports: [MatCardModule, NgClass],
   templateUrl: './card-word.component.html',
-  styleUrl: './card-word.component.css'
+  styleUrl: './card-word.component.css',
 })
 export class CardWordComponent {
-  @Input()  word? : string;
+  @Input() word?: string;
   @Input() status?: WordStatus;
-WordStatus = WordStatus;
-
+  WordStatus = WordStatus;
 }
-
-

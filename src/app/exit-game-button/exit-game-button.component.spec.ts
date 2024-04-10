@@ -8,10 +8,9 @@ describe('ExitGameButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ExitGameButtonComponent]
-    })
-    .compileComponents();
-    
+      imports: [ExitGameButtonComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ExitGameButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,6 +1,6 @@
 export class TranslatedWord {
-    constructor(
-        public origin : string,
-        public target: string) 
-        {}
+  constructor(
+    public origin: string,
+    public target: string,
+  ) {}
 }

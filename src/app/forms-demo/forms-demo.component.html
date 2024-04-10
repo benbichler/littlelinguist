@@ -2,39 +2,80 @@
   <div class="category-container">
     <mat-form-field>
       <mat-label>Category Name:</mat-label>
-      <input matInput [(ngModel)]="currentCategory.name" name="name" required>
+      <input matInput [(ngModel)]="currentCategory.name" name="name" required />
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Source Language:</mat-label>
-      <input matInput [(ngModel)]="currentCategory.origin" name="origin" required disabled>
+      <input
+        matInput
+        [(ngModel)]="currentCategory.origin"
+        name="origin"
+        required
+        disabled
+      />
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Target Language:</mat-label>
-      <input matInput [(ngModel)]="currentCategory.target" name="target" required disabled>
+      <input
+        matInput
+        [(ngModel)]="currentCategory.target"
+        name="target"
+        required
+        disabled
+      />
     </mat-form-field>
-  
-    <button mat-raised-button type="button" (click)="addNewWord()" color="primary">+ Add new word</button>
+
+    <button
+      mat-raised-button
+      type="button"
+      (click)="addNewWord()"
+      color="primary"
+    >
+      + Add new word
+    </button>
   </div>
 
-  <div *ngFor="let word of currentCategory.words; let i = index" class="word-container">
+  <div
+    *ngFor="let word of currentCategory.words; let i = index"
+    class="word-container"
+  >
     <mat-form-field>
       <mat-label>Origin</mat-label>
-      <input matInput [(ngModel)]="word.origin" name="wordOrigin{{i}}" required>
+      <input
+        matInput
+        [(ngModel)]="word.origin"
+        name="wordOrigin{{ i }}"
+        required
+      />
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Target</mat-label>
-      <input matInput [(ngModel)]="word.target" name="wordTarget{{i}}" required>
+      <input
+        matInput
+        [(ngModel)]="word.target"
+        name="wordTarget{{ i }}"
+        required
+      />
     </mat-form-field>
-   <button mat-icon-button (click)="deleteWord(i)"><mat-icon>delete</mat-icon></button>
+    <button mat-icon-button (click)="deleteWord(i)">
+      <mat-icon>delete</mat-icon>
+    </button>
   </div>
 
-
-
   <div class="saveButton">
-    <button type="submit" mat-raised-button color="primary" [disabled]="registrationForm.invalid || registrationForm.pristine || !hasAtLeastOne()">
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="
+        registrationForm.invalid ||
+        registrationForm.pristine ||
+        !hasAtLeastOne()
+      "
+    >
       Save
     </button>
   </div>

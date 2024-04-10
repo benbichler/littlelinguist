@@ -1,16 +1,16 @@
 <div class="game-summary">
-    <h1>{{ currentCategoryName }} - Results</h1>
-    <div class="summary-body">
-        Grade: {{ totalPointsEarned }}
-        <br>
-        <br>
-        Total Attempts: {{ numberOfAttempts }}
-        
-        <div class="translated-words">
-            <div *ngFor="let word of chosenWords" class="word-pair">
-                <div class="source-word">Source: {{ word.origin }}</div>
-                <div class="target-word">Target: {{ word.target }}</div>
-            </div>
-        </div>
+  <h1>{{ currentCategoryName }} - Results</h1>
+  <div class="summary-body">
+    Grade: {{ totalPointsEarned }}
+    <br />
+    <br />
+    Total Attempts: {{ numberOfAttempts }}
+
+    <div class="translated-words">
+      <div *ngFor="let word of chosenWords" class="word-pair">
+        <div class="source-word">Source: {{ word.origin }}</div>
+        <div class="target-word">Target: {{ word.target }}</div>
+      </div>
     </div>
+  </div>
 </div>

@@ -1,27 +1,38 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {FormsModule, NgModel} from '@angular/forms';
+import { FormsModule, NgModel } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { CategoryService } from '../services/category.service';
 import { Category } from '../shared/model/category';
 import { Language } from '../shared/model/language';
-import {TranslatedWord} from "../shared/model/translateword";
-import {NgForOf, NgIf} from "@angular/common";
-import {MatIconModule} from "@angular/material/icon";
+import { TranslatedWord } from '../shared/model/translateword';
+import { NgForOf, NgIf } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-forms-demo',
   standalone: true,
-  imports: [FormsModule, MatButtonModule, MatFormFieldModule, MatInputModule, NgForOf, NgIf, MatIconModule],
+  imports: [
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    NgForOf,
+    NgIf,
+    MatIconModule,
+  ],
   templateUrl: './forms-demo.component.html',
-  styleUrls: ['./forms-demo.component.css']
+  styleUrls: ['./forms-demo.component.css'],
 })
 export class FormsDemoComponent implements OnInit {
-  currentCategory: Category = new Category(-1, '',  new Date())
-  constructor(private categoryService: CategoryService, private router: Router) {}
-  @Input()idString?:string
+  currentCategory: Category = new Category(-1, '', new Date());
+  constructor(
+    private categoryService: CategoryService,
+    private router: Router,
+  ) {}
+  @Input() idString?: string;
 
   ngOnInit(): void {
     if (this.idString) {
@@ -29,7 +40,7 @@ export class FormsDemoComponent implements OnInit {
       const category = this.categoryService.get(id);
       if (category) {
         this.currentCategory = category;
-      } 
+      }
     }
   }
 
@@ -49,13 +60,13 @@ export class FormsDemoComponent implements OnInit {
     return '';
   }
   hasAtLeastOne() {
-    return this.currentCategory.words.length !== 0
+    return this.currentCategory.words.length !== 0;
   }
-  onSubmitRegistration() : void {
-    console.log("Form submitted!");
-    if(this.idString) { 
+  onSubmitRegistration(): void {
+    console.log('Form submitted!');
+    if (this.idString) {
       this.categoryService.update(this.currentCategory);
-    } else{
+    } else {
       this.categoryService.add(this.currentCategory);
     }
     this.router.navigate(['/']);

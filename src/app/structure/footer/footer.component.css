@@ -3,13 +3,12 @@
 .toolbar-icon {
   position: fixed; /* Keeps the icon fixed during scrolling */
   right: 0; /* Aligns the icon to the right */
-  bottom: 0; 
+  bottom: 0;
   cursor: pointer; /* Changes the cursor to a pointer when hovering over the icon */
 }
 
-
 .mat-icon {
-  font-size: 24px; 
-  color: #333; 
+  font-size: 24px;
+  color: #333;
   cursor: pointer;
 }

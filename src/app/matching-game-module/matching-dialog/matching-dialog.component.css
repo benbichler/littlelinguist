@@ -1,56 +1,55 @@
 /* Base styles for the dialog */
 .dialog {
-    border-radius: 8px;
-    text-align: center;
-  }
-  
-  /* Styles for the matched dialog */
-  .matched-dialog {
-    background-color: #e8f5e9; /* A light green background */
-    color: black; /* Dark green text color for contrast */
-  }
-  
-  /* Styles for the wrong dialog */
-  .wrong-dialog {
-    background-color: #ffebee; /* A light red background */
-    color: #c62828; /* Dark red text color for contrast */
-  }
+  border-radius: 8px;
+  text-align: center;
+}
 
-  .game-over-dialog{
-    background-color:aliceblue;
-    color: green;
+/* Styles for the matched dialog */
+.matched-dialog {
+  background-color: #e8f5e9; /* A light green background */
+  color: black; /* Dark green text color for contrast */
+}
+
+/* Styles for the wrong dialog */
+.wrong-dialog {
+  background-color: #ffebee; /* A light red background */
+  color: #c62828; /* Dark red text color for contrast */
+}
+
+.game-over-dialog {
+  background-color: aliceblue;
+  color: green;
+}
+
+.dialog-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.dialog-body {
+  font-size: 16px;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dialog-button {
+  color: inherit; /* Inherits color from its parent (matched-dialog or wrong-dialog) */
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+
+  /* Slight background on hover for the button for better user interaction */
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
   }
-  
-  .dialog-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: black;
-  }
-  
-  .dialog-body {
-    font-size: 16px;
-    color: black;
-    margin-bottom: 20px;
-  }
-  
-  .dialog-footer {
-    display: flex;
-    justify-content: flex-end;
-  }
-  
-  .dialog-button {
-    color: inherit; /* Inherits color from its parent (matched-dialog or wrong-dialog) */
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    padding: 10px 20px;
-    font-size: 16px;
-    transition: background-color 0.3s;
-  
-    /* Slight background on hover for the button for better user interaction */
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.1);
-    }
-  }
-  
+}

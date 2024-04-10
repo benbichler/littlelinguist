@@ -8,10 +8,9 @@ describe('ExitGameDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ExitGameDialogComponent]
-    })
-    .compileComponents();
-    
+      imports: [ExitGameDialogComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ExitGameDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

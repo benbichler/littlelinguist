@@ -1,29 +1,28 @@
-.word-content{
-    color: white;
+.word-content {
+  color: white;
 }
 
-.selected{
- color: blue;
+.selected {
+  color: blue;
 }
 
-.disabled{
-color: gray;
-
+.disabled {
+  color: gray;
 }
 .card-container .card-content mat-card {
-    width: 180px;  /* Increase width as needed */
-    height: 90px; /* Increase height as needed */
+  width: 180px; /* Increase width as needed */
+  height: 90px; /* Increase height as needed */
 }
 
 .card-container .card-content mat-card .mat-card-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .word-content {
-    font-size: 20px; 
-    text-align: center;/* Adjust font size for better visibility */
-      /* Adjust padding as needed */
-    /* Add more styling as needed */
+  font-size: 20px;
+  text-align: center; /* Adjust font size for better visibility */
+  /* Adjust padding as needed */
+  /* Add more styling as needed */
 }

@@ -1,40 +1,45 @@
 <div>
   <mat-table [dataSource]="categories">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Category Name </mat-header-cell>
+      <mat-cell *matCellDef="let category"> {{ category.name }} </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> Category Name </mat-header-cell>
-        <mat-cell *matCellDef="let category"> {{category.name}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="words">
+      <mat-header-cell *matHeaderCellDef> Words </mat-header-cell>
+      <mat-cell *matCellDef="let category">
+        {{ category.words.length }}
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="words">
-        <mat-header-cell *matHeaderCellDef> Words </mat-header-cell>
-        <mat-cell *matCellDef="let category">
-          {{category.words.length}}
-        </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="lastModified">
+      <mat-header-cell *matHeaderCellDef>Last edit date</mat-header-cell>
+      <mat-cell *matCellDef="let category">
+        {{ category.lastModifiedDate | date: "fullDate" }}
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="lastModified">
-        <mat-header-cell *matHeaderCellDef>Last edit date</mat-header-cell>
-        <mat-cell *matCellDef="let category"> {{category.lastModifiedDate | date: 'fullDate'}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Actions</mat-header-cell>
+      <mat-cell *matCellDef="let category">
+        <button mat-icon-button (click)="editCategory(category.id)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          (click)="deleteCategory(category.id, category.name)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
 
-
-      <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef> Actions</mat-header-cell>
-        <mat-cell *matCellDef="let category">
-
-          <button mat-icon-button (click)="editCategory(category.id)"><mat-icon>edit</mat-icon></button>
-          <button mat-icon-button (click)="deleteCategory(category.id, category.name)"><mat-icon>delete</mat-icon></button>
-        </mat-cell>
-      </ng-container>
-
-
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-<div class="createCatButton">
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+  <div class="createCatButton">
     <button mat-raised-button color="primary" (click)="addNewCategory()">
-       + Create Category
+      + Create Category
     </button>
   </div>
 </div>

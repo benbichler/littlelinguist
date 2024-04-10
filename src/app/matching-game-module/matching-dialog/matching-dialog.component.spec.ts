@@ -8,10 +8,9 @@ describe('MatchingDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatchingDialogComponent]
-    })
-    .compileComponents();
-    
+      imports: [MatchingDialogComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(MatchingDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

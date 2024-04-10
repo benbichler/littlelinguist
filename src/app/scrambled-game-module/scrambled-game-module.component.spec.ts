@@ -8,10 +8,9 @@ describe('ScrambledGameModuleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ScrambledGameModuleComponent]
-    })
-    .compileComponents();
-    
+      imports: [ScrambledGameModuleComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ScrambledGameModuleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

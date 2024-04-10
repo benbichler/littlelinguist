@@ -2,23 +2,25 @@ import { Injectable } from '@angular/core';
 import { Category } from '../shared/model/category';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CategoryService {
-
   private readonly NEXT_ID_KEY = 'nextId';
   private readonly CATEGORIES_KEY = 'categories';
   private idStringKey = 'currentCategoryId';
-  
-  private setCategories(allCategories: Map<number, Category>) : void {
-    localStorage.setItem(this.CATEGORIES_KEY, JSON.stringify(Array.from(allCategories.values())));
+
+  private setCategories(allCategories: Map<number, Category>): void {
+    localStorage.setItem(
+      this.CATEGORIES_KEY,
+      JSON.stringify(Array.from(allCategories.values())),
+    );
   }
 
-  private getCategories() : Map<number, Category>{
+  private getCategories(): Map<number, Category> {
     let categoriesString = localStorage.getItem(this.CATEGORIES_KEY);
     let idToCategory = new Map<number, Category>();
 
-    if(categoriesString) {
+    if (categoriesString) {
       JSON.parse(categoriesString).forEach((category: Category) => {
         Object.setPrototypeOf(category, Category.prototype);
         idToCategory.set(category.id, category);
@@ -28,11 +30,11 @@ export class CategoryService {
   }
 
   private getNextId(): number {
-  let nextIdString = localStorage.getItem(this.NEXT_ID_KEY);
-  return nextIdString ? parseInt(nextIdString) : 0; 
+    let nextIdString = localStorage.getItem(this.NEXT_ID_KEY);
+    return nextIdString ? parseInt(nextIdString) : 0;
   }
 
-  private setNextId(id: number) : void {
+  private setNextId(id: number): void {
     localStorage.setItem(this.NEXT_ID_KEY, id.toString());
   }
 
@@ -41,20 +43,24 @@ export class CategoryService {
   }
 
   get(id: number): Category {
-   let categoriesMap = this.getCategories().get(id)!;
-   if(!categoriesMap){
-    throw new Error(`Category number ${id} doesn't exist and can not be retrieved.`)
-   }
-   return categoriesMap;
+    let categoriesMap = this.getCategories().get(id)!;
+    if (!categoriesMap) {
+      throw new Error(
+        `Category number ${id} doesn't exist and can not be retrieved.`,
+      );
+    }
+    return categoriesMap;
   }
 
   delete(id: number): void {
-   let categoriesMap = this.getCategories();
-   if(!categoriesMap.has(id)) {
-    throw new Error(`Category number ${id} doesn't exist and can not be deleted.`);
-   }
-   categoriesMap.delete(id);
-   this.setCategories(categoriesMap);
+    let categoriesMap = this.getCategories();
+    if (!categoriesMap.has(id)) {
+      throw new Error(
+        `Category number ${id} doesn't exist and can not be deleted.`,
+      );
+    }
+    categoriesMap.delete(id);
+    this.setCategories(categoriesMap);
   }
 
   add(category: Category) {
@@ -63,21 +69,23 @@ export class CategoryService {
 
     let categoriesMap = this.getCategories();
     categoriesMap.set(category.id, category);
-    
+
     this.setCategories(categoriesMap);
     this.setNextId(++category.id);
   }
 
   update(category: Category) {
     let categoriesMap = this.getCategories();
-    if(!categoriesMap.has(category.id)){
-      throw new Error(`Category number ${category.id} doesn't exist and can not be updated.`)
+    if (!categoriesMap.has(category.id)) {
+      throw new Error(
+        `Category number ${category.id} doesn't exist and can not be updated.`,
+      );
     }
     categoriesMap.set(category.id, category);
     this.setCategories(categoriesMap);
   }
 
-  setCurrentCategoryId(idString: string): void{
+  setCurrentCategoryId(idString: string): void {
     console.log(`Setting current category ID: ${idString}`);
     localStorage.setItem(this.idStringKey, idString);
   }
@@ -88,4 +96,3 @@ export class CategoryService {
     return id;
   }
 }
-

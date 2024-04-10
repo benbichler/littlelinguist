@@ -13,32 +13,42 @@ import { ShowPointsComponent } from '../show-points/show-points.component';
 @Component({
   selector: 'app-category-view',
   standalone: true,
-  imports: [ShowPointsComponent, CategoryCardComponent, CommonModule, RouterModule, MatButtonModule, CategoryDialogComponent, FormsModule],
+  imports: [
+    ShowPointsComponent,
+    CategoryCardComponent,
+    CommonModule,
+    RouterModule,
+    MatButtonModule,
+    CategoryDialogComponent,
+    FormsModule,
+  ],
   templateUrl: './category-view.component.html',
-  styleUrl: './category-view.component.css'
+  styleUrl: './category-view.component.css',
 })
-
 export class CategoryViewComponent implements OnInit {
   categories: Category[] = [];
   selectedCategoryId: number = 0;
   selectedCategory: Category | undefined;
 
-  
-  constructor (private categoryService: CategoryService, private dialog: MatDialog, private router: Router) {}
+  constructor(
+    private categoryService: CategoryService,
+    private dialog: MatDialog,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
-      this.categories = this.categoryService.list();
+    this.categories = this.categoryService.list();
   }
 
   onCategorySelected(): void {
-    this.selectedCategory = this.categories.find(category => category.id === +this.selectedCategoryId);
+    this.selectedCategory = this.categories.find(
+      (category) => category.id === +this.selectedCategoryId,
+    );
   }
-  
+
   startGame(id: number): void {
     const dialogRef = this.dialog.open(CategoryDialogComponent, {
-      data: id
+      data: id,
     });
-
-    }
+  }
 }
-
