@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+  <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/admin">מצב ניהול</button>
+    <button mat-menu-item routerLink="/cards">מסך ראשי</button>
+  </mat-menu>
+
+  <span (click)="navigateHome()" class="toolbar-center-title">
+    Little Linguist: Your Gateway to Mastering English
+  </span>
+
+  <div class="toolbar-icons">
+    <mat-icon class="toolbar-icon">person</mat-icon>
+    <mat-icon class="toolbar-icon">search</mat-icon>
+  </div>
+</mat-toolbar>

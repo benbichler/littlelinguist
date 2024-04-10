@@ -1,0 +1,51 @@
+.title {
+  text-align: center;
+  align-items: center;
+}
+
+.game-content {
+  display: flex;
+  justify-content: center;
+}
+
+.word-columns {
+  display: flex;
+  justify-content: center;
+}
+
+.column {
+  margin: 0 10px;
+}
+
+app-card-word {
+  display: block;
+  width: 200px !important; /* Increased width for larger size */
+  height: 120px !important; /* Increased height for larger size */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.exit-button {
+  margin-right: auto;
+}
+
+.points-container {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+mat-icon {
+  font-size: 1.5em;
+  margin-right: 8px;
+}
+
+.points {
+  font-weight: bold;
+  font-size: 1.5em;
+}

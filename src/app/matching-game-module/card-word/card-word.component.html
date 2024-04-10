@@ -1,0 +1,17 @@
+<div class="card-container">
+  <div class="card-content">
+    <mat-card>
+      <mat-card-content>
+        <div
+          class="word-content"
+          [ngClass]="{
+            disabled: status === WordStatus.Disabled,
+            selected: status === WordStatus.Selected
+          }"
+        >
+          {{ word }}
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

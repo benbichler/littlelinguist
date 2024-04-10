@@ -1,0 +1,26 @@
+<mat-form-field appearance="fill">
+  <mat-label>Select a game</mat-label>
+  <mat-select [(ngModel)]="selectedGame" class="game-select">
+    <mat-option *ngFor="let game of games" [value]="game">
+      {{ game.gameName }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<div mat-dialog-content class="dialog-content" *ngIf="selectedGame">
+  <h2 class="dialog-title">{{ selectedGame.gameName }}</h2>
+  <p class="dialog-text">Description: {{ selectedGame.gameDesc }}</p>
+  <p class="dialog-text">Difficulty: {{ selectedGame.difficultyLev }}</p>
+</div>
+
+<div mat-dialog-actions class="dialog-actions">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    mat-button
+    color="primary"
+    [disabled]="!selectedGame"
+    [routerLink]="[selectedGame?.url, id]"
+    mat-dialog-close
+  >
+    OK
+  </button>
+</div>

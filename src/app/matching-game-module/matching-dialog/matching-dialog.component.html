@@ -1,0 +1,18 @@
+<div
+  class="dialog"
+  [ngClass]="{
+    'matched-dialog': data.dialogType === 'matched',
+    'wrong-dialog': data.dialogType === 'wrong',
+    'game-over-dialog': data.dialogType === 'gameover'
+  }"
+>
+  <mat-dialog-content class="dialog-title">{{ data.title }}</mat-dialog-content>
+  <mat-dialog-content class="dialog-body">
+    <p class="dialog-text">{{ data.message }}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions class="dialog-footer">
+    <button mat-button class="dialog-button" (click)="onClose()">
+      {{ data.buttonText }}
+    </button>
+  </mat-dialog-actions>
+</div>

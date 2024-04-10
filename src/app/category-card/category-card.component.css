@@ -1,0 +1,24 @@
+.card-container {
+  width: 200px;
+  background-color: #333;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  color: #333;
+  margin: 2px;
+}
+
+.card-content {
+  text-align: center;
+}
+
+.card-content {
+  position: relative; /* Set the position of the card content container to relative */
+}
+
+.star {
+  color: yellow;
+  margin-left: 8px;
+}

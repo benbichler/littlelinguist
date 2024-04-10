@@ -1,0 +1,34 @@
+body {
+  margin: auto;
+}
+
+span {
+  font-size: 20px;
+  padding: 10px;
+}
+
+.category-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column; /* Aligns form fields vertically */
+  align-items: center; /* Centers the content horizontally */
+}
+
+mat-form-field {
+  width: 200px; /* Smaller width for input fields */
+  margin: 10px; /* Spacing around each field */
+}
+
+.word-container {
+  display: flex;
+  flex-direction: row; /* Aligns children in a row */
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Ensure the container takes full width */
+}
+
+.saveButton {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}

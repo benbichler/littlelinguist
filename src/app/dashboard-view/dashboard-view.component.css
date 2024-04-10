@@ -1,0 +1,46 @@
+span {
+  color: black;
+  text-align: center;
+  font-size: 40px;
+  display: block;
+}
+
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.info-card,
+.points-card {
+  background-color: #e91e63;
+  text-align: center;
+  margin: 10px;
+  width: 250px;
+  height: 210px;
+}
+
+.info-card {
+  margin-right: 20px;
+}
+
+.title,
+.points-title {
+  margin-top: 20px;
+  font-size: 22px;
+}
+mat-card-title {
+  font-size: 30px;
+  color: white;
+}
+mat-card-content {
+  font-size: 80px;
+  margin-top: 10px;
+  color: #e0e0e0;
+}
+
+.session-count,
+.points-count {
+  font-size: 18px;
+  margin-top: 15px;
+}
