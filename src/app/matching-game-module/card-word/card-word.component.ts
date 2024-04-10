@@ -1,9 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Category } from '../../shared/model/category';
+import { Component, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { CommonModule, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { WordStatus } from '../shared/model/wordstatus';
-import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-card-word',

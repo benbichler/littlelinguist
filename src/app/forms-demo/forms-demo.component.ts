@@ -6,7 +6,6 @@ import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { CategoryService } from '../services/category.service';
 import { Category } from '../shared/model/category';
-import { Language } from '../shared/model/language';
 import { TranslatedWord } from '../shared/model/translateword';
 import { NgForOf, NgIf } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -30,13 +29,13 @@ export class FormsDemoComponent implements OnInit {
   currentCategory: Category = new Category(-1, '', new Date());
   constructor(
     private categoryService: CategoryService,
-    private router: Router,
+    private router: Router
   ) {}
   @Input() idString?: string;
 
   ngOnInit(): void {
     if (this.idString) {
-      let id: number = parseInt(this.idString);
+      const id: number = parseInt(this.idString);
       const category = this.categoryService.get(id);
       if (category) {
         this.currentCategory = category;

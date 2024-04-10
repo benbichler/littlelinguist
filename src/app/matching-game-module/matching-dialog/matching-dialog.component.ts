@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import {
   MatDialogRef,
   MAT_DIALOG_DATA,
@@ -16,7 +16,7 @@ import { NgClass } from '@angular/common';
 export class MatchingDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<MatchingDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   onClose(): void {

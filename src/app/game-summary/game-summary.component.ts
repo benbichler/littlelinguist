@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TranslatedWord } from '../shared/model/translateword';
 import { NgFor } from '@angular/common';
 @Component({
@@ -8,9 +8,7 @@ import { NgFor } from '@angular/common';
   templateUrl: './game-summary.component.html',
   styleUrl: './game-summary.component.css',
 })
-export class GameSummaryComponent implements OnInit {
-  ngOnInit(): void {}
-
+export class GameSummaryComponent {
   @Input() currentCategoryName?: string;
   @Input() chosenWords: TranslatedWord[] = [];
   @Input() numberOfAttempts: number = 0;

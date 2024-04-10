@@ -1,11 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Category } from '../../shared/model/category';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { NgIf, NgForOf, CommonModule } from '@angular/common';
 import { CategoryService } from '../../services/category.service';
-import { GameInformationService } from '../../services/game-information.service';
-import { Language } from '../../shared/model/language';
 import { RouterModule, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { ExitGameButtonComponent } from '../../exit-game-button/exit-game-button.component';
@@ -42,12 +40,12 @@ import { GameSummaryComponent } from '../../game-summary/game-summary.component'
     GameSummaryComponent,
   ],
 })
-export class MatchingGameComponent {
+export class MatchingGameComponent implements OnInit {
   constructor(
     private categoryService: CategoryService,
     private dialog: MatDialog,
     private router: Router,
-    private GamePointsService: GamePointsService,
+    private GamePointsService: GamePointsService
   ) {}
   currentCategory?: Category;
   chosenWordsEnglish: TranslatedWord[] = [];
@@ -71,7 +69,7 @@ export class MatchingGameComponent {
   private loadCurrentCategory(): void {
     if (this.currentCategoryId) {
       this.currentCategory = this.categoryService.get(
-        parseInt(this.currentCategoryId),
+        parseInt(this.currentCategoryId)
       );
       console.log('Current Category:', this.currentCategory);
       if (this.currentCategory) {
@@ -107,7 +105,7 @@ export class MatchingGameComponent {
     // Select the first 'count' words directly without shuffling
     const tempWords = this.selectRandomWords(
       category.words,
-      MatchingGameComponent.WORDS_PER_GAME,
+      MatchingGameComponent.WORDS_PER_GAME
     );
     console.log('Selected words:', tempWords);
     // Assign English words directly
@@ -124,16 +122,16 @@ export class MatchingGameComponent {
     console.log('Hebrew words:', this.chosenWordsHebrew);
     // Initialize the word statuses
     this.englishWordStatus = Array(MatchingGameComponent.WORDS_PER_GAME).fill(
-      WordStatus.Normal,
+      WordStatus.Normal
     );
     this.hebrewWordStatus = Array(MatchingGameComponent.WORDS_PER_GAME).fill(
-      WordStatus.Normal,
+      WordStatus.Normal
     );
   }
 
   private selectRandomWords(
     words: TranslatedWord[],
-    count: number,
+    count: number
   ): TranslatedWord[] {
     // This function just takes the first 'count' words from the list
     return words.slice(0, count);
@@ -141,10 +139,10 @@ export class MatchingGameComponent {
 
   private updateWordStatusToSelected(
     index: number,
-    wordStatus: WordStatus[],
+    wordStatus: WordStatus[]
   ): void {
     const selectedIndex = wordStatus.findIndex(
-      (status) => status == WordStatus.Selected,
+      (status) => status == WordStatus.Selected
     );
     if (selectedIndex > -1) {
       wordStatus[selectedIndex] = WordStatus.Normal;
@@ -154,7 +152,7 @@ export class MatchingGameComponent {
 
   private updateWordStatusToDisabled(
     index: number,
-    wordStatus: WordStatus[],
+    wordStatus: WordStatus[]
   ): void {
     wordStatus[index] = WordStatus.Disabled;
   }
@@ -172,7 +170,7 @@ export class MatchingGameComponent {
       'WELL DONE!',
       `You managed to match ${MatchingGameComponent.WORDS_PER_GAME} pairs of words and you've finished the game!`,
       'SHOW GAME SUMMARY',
-      'gameover',
+      'gameover'
     );
   }
 
@@ -181,7 +179,7 @@ export class MatchingGameComponent {
       'MATCHED!',
       `You have matched ${this.totalSuccess} words.`,
       'CONTINUE',
-      'matched',
+      'matched'
     );
   }
 
@@ -190,24 +188,21 @@ export class MatchingGameComponent {
       'WRONG!',
       `You failed matching the words. You have ${this.totalAttempts} attempts so far.`,
       'TRY AGAIN!',
-      'wrong',
+      'wrong'
     );
   }
 
   handleWordClicked(index: number): void {
-    let englishWordIndex = this.englishWordStatus.findIndex(
-      (status) => status == WordStatus.Selected,
-    );
-    let hebrewWordIndex = this.hebrewWordStatus.findIndex(
-      (status) => status == WordStatus.Selected,
+    const hebrewWordIndex = this.hebrewWordStatus.findIndex(
+      (status) => status == WordStatus.Selected
     );
 
     if (this.englishWordStatus[index] !== WordStatus.Disabled) {
       this.updateWordStatusToSelected(index, this.englishWordStatus);
 
       if (hebrewWordIndex !== -1) {
-        let chosenWordInEnglish = this.chosenWordsEnglish[index].target;
-        let chosenWordInHebrew = this.chosenWordsHebrew[hebrewWordIndex];
+        const chosenWordInEnglish = this.chosenWordsEnglish[index].target;
+        const chosenWordInHebrew = this.chosenWordsHebrew[hebrewWordIndex];
 
         if (chosenWordInEnglish !== chosenWordInHebrew) {
           this.totalAttempts++;
@@ -219,7 +214,7 @@ export class MatchingGameComponent {
           this.updateWordStatusToDisabled(index, this.englishWordStatus);
           this.updateWordStatusToDisabled(
             hebrewWordIndex,
-            this.hebrewWordStatus,
+            this.hebrewWordStatus
           );
           this.calculatePoints(true);
           this.totalSuccess++;
@@ -227,7 +222,7 @@ export class MatchingGameComponent {
           if (this.isGameOver()) {
             this.completedGameDialog();
             this.GamePointsService.addGamePlayed(
-              new GamePlayed(this.currentCategory!.id, 1, this.totalPoints),
+              new GamePlayed(this.currentCategory!.id, 1, this.totalPoints)
             );
           }
         }
@@ -236,20 +231,17 @@ export class MatchingGameComponent {
   }
 
   handleHebrewWordClicked(index: number): void {
-    let englishWordIndex = this.englishWordStatus.findIndex(
-      (status) => status == WordStatus.Selected,
-    );
-    let hebrewWordIndex = this.hebrewWordStatus.findIndex(
-      (status) => status == WordStatus.Selected,
+    const englishWordIndex = this.englishWordStatus.findIndex(
+      (status) => status == WordStatus.Selected
     );
 
     if (this.hebrewWordStatus[index] !== WordStatus.Disabled) {
       this.updateWordStatusToSelected(index, this.hebrewWordStatus);
 
       if (englishWordIndex !== -1) {
-        let chosenWordInEnglish =
+        const chosenWordInEnglish =
           this.chosenWordsEnglish[englishWordIndex].target;
-        let chosenWordInHebrew = this.chosenWordsHebrew[index];
+        const chosenWordInHebrew = this.chosenWordsHebrew[index];
 
         if (chosenWordInHebrew !== chosenWordInEnglish) {
           this.totalAttempts++;
@@ -260,7 +252,7 @@ export class MatchingGameComponent {
         } else {
           this.updateWordStatusToDisabled(
             englishWordIndex,
-            this.englishWordStatus,
+            this.englishWordStatus
           );
           this.updateWordStatusToDisabled(index, this.hebrewWordStatus);
           this.calculatePoints(true);
@@ -269,7 +261,7 @@ export class MatchingGameComponent {
           if (this.isGameOver()) {
             this.completedGameDialog();
             this.GamePointsService.addGamePlayed(
-              new GamePlayed(this.currentCategory!.id, 1, this.totalPoints),
+              new GamePlayed(this.currentCategory!.id, 1, this.totalPoints)
             );
           }
         }
@@ -281,7 +273,7 @@ export class MatchingGameComponent {
     title: string,
     message: string,
     buttonText: string,
-    dialogType: string,
+    dialogType: string
   ) {
     return this.dialog.open(MatchingDialogComponent, {
       data: { title, message, buttonText, dialogType }, // Pass dialogType along with other data

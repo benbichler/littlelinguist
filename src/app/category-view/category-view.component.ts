@@ -33,7 +33,7 @@ export class CategoryViewComponent implements OnInit {
   constructor(
     private categoryService: CategoryService,
     private dialog: MatDialog,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -42,12 +42,12 @@ export class CategoryViewComponent implements OnInit {
 
   onCategorySelected(): void {
     this.selectedCategory = this.categories.find(
-      (category) => category.id === +this.selectedCategoryId,
+      (category) => category.id === +this.selectedCategoryId
     );
   }
 
   startGame(id: number): void {
-    const dialogRef = this.dialog.open(CategoryDialogComponent, {
+    this.dialog.open(CategoryDialogComponent, {
       data: id,
     });
   }
