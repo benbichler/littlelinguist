@@ -4,7 +4,7 @@
   </div>
   <h1 class="title">Matching Game - {{ currentCategory?.name }}</h1>
   <div class="points-container">
-    <mat-icon>score</mat-icon><span class="points">{{ totalPoints }}</span>
+    <app-points-display [earnedPoints]="totalPoints"></app-points-display>
   </div>
 </div>
 

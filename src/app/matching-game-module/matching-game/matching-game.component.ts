@@ -18,7 +18,7 @@ import { ShowPointsComponent } from '../../show-points/show-points.component';
 import { TranslatedWord } from '../../shared/model/translateword';
 import { MatButtonModule } from '@angular/material/button';
 import { GameSummaryComponent } from '../../game-summary/game-summary.component';
-
+import { PointsDisplayComponent } from '../../points-display/points-display.component';
 @Component({
   selector: 'app-matching-game',
   standalone: true,
@@ -38,6 +38,7 @@ import { GameSummaryComponent } from '../../game-summary/game-summary.component'
     RouterModule,
     ExitGameButtonComponent,
     GameSummaryComponent,
+    PointsDisplayComponent,
   ],
 })
 export class MatchingGameComponent implements OnInit {
@@ -102,6 +103,11 @@ export class MatchingGameComponent implements OnInit {
   }
 
   private initializeGameWords(category: Category): void {
+    if (category.words.length < MatchingGameComponent.WORDS_PER_GAME) {
+      this.showMessageAtEnd =
+        'This category does not have enough words to start the game.';
+      return; // Exit the function early if not enough words are available
+    }
     // Select the first 'count' words directly without shuffling
     const tempWords = this.selectRandomWords(
       category.words,
