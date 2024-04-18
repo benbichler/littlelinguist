@@ -51,7 +51,7 @@ export class MatchingGameComponent implements OnInit {
   currentCategory?: Category;
   chosenWordsEnglish: TranslatedWord[] = [];
   chosenWordsHebrew: string[] = [];
-  showMessageAtEnd?: string;
+  showMessageIfNotEnough?: string;
   englishWordStatus: WordStatus[] = [];
   hebrewWordStatus: WordStatus[] = [];
   private static readonly WORDS_PER_GAME = 5;
@@ -61,10 +61,10 @@ export class MatchingGameComponent implements OnInit {
   totalSuccess: number = 0;
   totalAttempts: number = 0;
   @Input() currentCategoryId?: string;
+  gameStarted = false;
 
   ngOnInit(): void {
     this.loadCurrentCategory();
-    console.log('Loaded categories:', this.categoryService.list());
   }
 
   private loadCurrentCategory(): void {
@@ -72,40 +72,41 @@ export class MatchingGameComponent implements OnInit {
       this.currentCategory = this.categoryService.get(
         parseInt(this.currentCategoryId)
       );
-      console.log('Current Category:', this.currentCategory);
+      console.log('Current Category:', this.currentCategory); // Debugging
       if (this.currentCategory) {
         this.processCategoryWords();
+      } else {
+        console.log('Failed to load category.'); // Debugging
       }
     }
   }
 
   private processCategoryWords(): void {
-    console.log('processCategoryWords called');
-
-    // Check explicitly if this.currentCategory is not undefined before proceeding.
-    if (
-      this.currentCategory !== undefined &&
-      this.hasEnoughWords(this.currentCategory)
-    ) {
-      console.log('Enough words, initializing game...');
+    console.log('processCategoryWords called', this.currentCategory); // Debugging
+    if (this.currentCategory && this.hasEnoughWords(this.currentCategory)) {
+      console.log('Enough words, initializing game...'); // Debugging
       this.initializeGameWords(this.currentCategory);
+      this.gameStarted = true;
     } else {
-      console.log('Not enough words, setting message...');
-      this.showMessageAtEnd =
-        'This category does not have enough words to start the game.';
+      console.log('Not enough words, setting message...'); // Debugging
+      this.preventGameStart();
+      this.showMessageIfNotEnough = `This category does not have enough words to start the game.
+      Press the button to be forwarded to the category selection page.
+      Choose another category and dive straight into a game!`;
     }
   }
-
+  private preventGameStart(): void {
+    this.gameStarted = false;
+  }
   private hasEnoughWords(category: Category): boolean {
-    this.showDisWords =
-      category.words.length < MatchingGameComponent.WORDS_PER_GAME;
-    return !this.showDisWords;
+    return category.words && category.words.length >= 5;
   }
 
   private initializeGameWords(category: Category): void {
     if (category.words.length < MatchingGameComponent.WORDS_PER_GAME) {
-      this.showMessageAtEnd =
-        'This category does not have enough words to start the game.';
+      this.showMessageIfNotEnough = `This category does not have enough words to start the game.
+      Press the button to be forwarded to the category selection page.
+      Choose another category and dive straight into a game!`;
       return; // Exit the function early if not enough words are available
     }
     // Select the first 'count' words directly without shuffling

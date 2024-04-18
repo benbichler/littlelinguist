@@ -12,10 +12,15 @@ import { FormsModule, NgModel } from '@angular/forms';
 import { GameSummaryComponent } from '../game-summary/game-summary.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { PointsDisplayComponent } from '../points-display/points-display.component';
+import { MatButtonModule } from '@angular/material/button';
+import { ScrambledSummaryComponent } from '../scrambled-summary/scrambled-summary.component';
 @Component({
   selector: 'app-scrambled-game-module',
   standalone: true,
+  templateUrl: './scrambled-game-module.component.html',
+  styleUrl: './scrambled-game-module.component.css',
   imports: [
+    MatButtonModule,
     ExitGameButtonComponent,
     MatIconModule,
     NgIf,
@@ -24,9 +29,8 @@ import { PointsDisplayComponent } from '../points-display/points-display.compone
     MatProgressBarModule,
     PointsDisplayComponent,
     FormsModule,
+    ScrambledSummaryComponent,
   ],
-  templateUrl: './scrambled-game-module.component.html',
-  styleUrl: './scrambled-game-module.component.css',
 })
 export class ScrambledGameModuleComponent implements OnInit {
   @Input() currentCategoryId?: string;
@@ -62,11 +66,11 @@ export class ScrambledGameModuleComponent implements OnInit {
     return scrambledLetters;
   }
 
+  verifyGuess(): void {}
+
   isGameOver(): boolean {
     return this.currentWordShownIndex === this.currentCategory?.words.length;
   }
-
-  verifyGuess(): void {}
 
   clearGuess(): void {}
 }

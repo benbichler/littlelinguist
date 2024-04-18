@@ -1,7 +1,5 @@
 <div class="header">
-  <div class="exit-button">
-    <app-exit-game-button></app-exit-game-button>
-  </div>
+  <div class="exit-button"><app-exit-game-button></app-exit-game-button></div>
   <h1 class="title">Scrambled Word Game - {{ currentCategory?.name }}</h1>
   <div class="points-container">
     <app-points-display [earnedPoints]="totalPoints"></app-points-display>
@@ -17,27 +15,25 @@
     Scrambled Letters: <span>{{ scrambledWord }}</span>
   </p>
   Your Guess:
-  <mat-form-field class="guess-field">
-    <input
-      type="text"
-      [(ngModel)]="userGuess"
-      placeholder="Type the correct word here"
-      ngModel
-      pattern="[a-zA-Z ]*"
-      #inputField="ngModel"
-    />
-    <mat-error *ngIf="inputField.invalid"
-      >Only English letters must be entered</mat-error
-    >
-  </mat-form-field>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="verifyGuess()"
-    [disabled]="inputField.invalid"
+
+  <input
+    type="text"
+    [(ngModel)]="userGuess"
+    placeholder="Type the correct word here"
+    ngModel
+    pattern="[a-zA-Z ]*"
+    #inputField="ngModel"
+  />
+  <mat-error *ngIf="inputField.invalid"
+    >Only English letters must be entered</mat-error
   >
-    Submit</button
-  >&nbsp;
-  <button mat-raised-button color="warn" (click)="clearGuess()">Reset</button
-  ><br /><br /><br />
+  <br />
+  <button mat-raised-button color="warn" (click)="clearGuess()">Reset</button>
+</div>
+<div *ngIf="isGameOver()">
+  <app-scrambled-summary
+    [earnedPoints]="totalPoints"
+    [selectedWords]="selectedWords"
+  >
+  </app-scrambled-summary>
 </div>

@@ -8,7 +8,15 @@
   </div>
 </div>
 
-<div *ngIf="!isGameOver()" class="game-content">
+<div *ngIf="showMessageIfNotEnough" class="handleMessageSit">
+  {{ showMessageIfNotEnough }}
+  <br />
+  <button mat-raised-button color="primary" [routerLink]="['/cards']">
+    Choose a Different Category
+  </button>
+</div>
+
+<div *ngIf="gameStarted && !isGameOver()" class="game-content">
   <div class="word-columns">
     <div class="column english-words">
       <app-card-word
@@ -27,17 +35,9 @@
       ></app-card-word>
     </div>
   </div>
-
-  <div *ngIf="showMessageAtEnd" class="handleMessageSit">
-    {{ showMessageAtEnd }}
-    <br />
-    <button mat-raised-button color="primary" [routerLink]="['/cards']">
-      Choose a Different Category
-    </button>
-  </div>
 </div>
 
-<div *ngIf="isGameOver()">
+<div *ngIf="gameStarted && isGameOver()">
   <app-game-summary
     [currentCategoryName]="currentCategory?.name"
     [chosenWords]="chosenWordsEnglish"

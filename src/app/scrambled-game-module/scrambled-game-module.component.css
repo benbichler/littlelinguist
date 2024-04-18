@@ -1,25 +1,89 @@
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-}
-
-.exit-button {
-  margin-right: auto;
-}
-
-mat-icon {
-  font-size: 1.5em;
-  margin-right: 8px;
-}
-
-app-points-display {
-  font-weight: bold;
-  font-size: 1.5em;
+  display: flex; /* Enables Flexbox layout */
+  justify-content: space-between; /* Distributes space between and around content items */
+  align-items: center; /* Aligns items vertically in the center */
+  padding: 10px 20px; /* Adds padding around the content */
 }
 
 .title {
-  text-align: center;
-  align-items: center;
+  flex-grow: 1; /* Allows the title to grow and fill the space for centering */
+  text-align: center; /* Centers the title text */
+  margin: 0; /* Removes default margin to aid in precise centering */
+  font-size: 24px; /* Sets a specific font size for the title */
+  color: #333; /* Dark gray for contrast */
+}
+
+.exit-button,
+.points-container {
+  /* Styling for button and points container to control size and spacing */
+  flex-shrink: 0; /* Prevents the exit button and points container from shrinking */
+}
+
+/* General styles for the game content area */
+.game-content {
+  padding: 20px;
+  background-color: #ffffff; /* White background for better focus */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds depth with a subtle shadow */
+  margin: 20px; /* Provides some spacing from the header */
+  font-family: Arial, sans-serif; /* Sets a clean, readable typeface */
+}
+
+/* Styling paragraphs for clarity */
+.game-content p {
+  color: #333; /* Dark color for better readability */
+  font-size: 16px; /* Adequate size for easy reading */
+  line-height: 1.5; /* Spacing out lines for readability */
+  margin-bottom: 10px; /* Spacing between paragraphs */
+}
+
+/* Specific styles for spans to differentiate them */
+.game-content span {
+  font-weight: bold; /* Makes the content stand out */
+}
+
+/* Styles for input fields */
+input[type="text"] {
+  width: 100%; /* Full width to accommodate longer text */
+  padding: 10px; /* Padding for ease of entry */
+  border: 2px solid #ccc; /* Subtle border */
+  border-radius: 4px; /* Matches the rounded design language */
+  margin-top: 5px; /* Separation from the label */
+  box-sizing: border-box; /* Border and padding included in width */
+}
+
+/* Error message styling */
+mat-error {
+  color: #d32f2f; /* Red to signify errors */
+  font-size: 14px; /* Smaller size to not overpower input labels */
+  margin-left: 5px; /* Small indent from the input field */
+}
+
+/* Button styling with distinction between actions */
+button {
+  font-size: 14px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-right: 5px; /* Spacing between buttons if inline */
+}
+
+/* Reset button with a warn color */
+button.mat-raised-button.color-warn {
+  background-color: #f44336; /* Vibrant red for cautionary actions like reset */
+  color: white;
+}
+
+button.mat-raised-button.color-warn:hover {
+  background-color: #c2302d; /* Darker red on hover for interactive feedback */
+}
+
+/* Progress bar styling, if used */
+mat-progress-bar {
+  background-color: #eee; /* Light background for the bar */
+  color: #007bff; /* Blue to indicate progress */
+  margin-top: 20px; /* Space from the last element */
+  height: 20px; /* Gives the bar a thicker and more visible appearance */
 }

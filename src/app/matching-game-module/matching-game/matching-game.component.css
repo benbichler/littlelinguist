@@ -49,3 +49,27 @@ app-points-display {
   font-weight: bold;
   font-size: 1.5em;
 }
+
+.handleMessageSit {
+  white-space: pre-wrap;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px; /* Adjust the height as needed */
+  border-radius: 8px;
+  margin: 20px;
+  padding: 20px;
+  text-align: center;
+  font-size: 24px;
+}
+
+.handleMessageSit button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 14px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
