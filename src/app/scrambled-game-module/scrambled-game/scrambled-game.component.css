@@ -1,0 +1,64 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.title {
+  flex-grow: 1;
+  text-align: center;
+  margin: 0;
+  font-size: 24px;
+}
+
+.exit-button,
+.points-container {
+  flex-basis: 20%;
+}
+
+.game-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers all items within game-content */
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  margin: 20px auto; /* Centers the game content horizontally */
+  max-width: 600px; /* Adjust based on your preference */
+  font-family: Arial, sans-serif;
+}
+
+input[type="text"] {
+  width: 50%; /* Adjusted width for the input box */
+  padding: 8px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  margin-top: 10px;
+  margin-bottom: 20px; /* Added bottom margin for spacing before buttons */
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-around; /* Ensures even spacing around buttons */
+  width: 100%; /* Full width to accommodate buttons side by side */
+  margin-top: 10px; /* Adds top margin for spacing after input */
+  margin-bottom: 20px; /* Adds bottom margin for spacing before progress bar */
+}
+
+.button-column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 48%; /* Nearly half the container, adjust spacing as needed */
+}
+
+button {
+  width: 100%; /* Full width in their respective columns */
+}
+
+.mat-progress-bar {
+  width: 100%;
+  height: 20px;
+  margin-top: 10px; /* Adjusted top margin for clear visibility */
+  margin-bottom: 20px; /* Added bottom margin to separate from other elements below if any */
+}

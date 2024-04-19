@@ -1,1 +1,18 @@
-<p>scrambled-summary works!</p>
+<div class="game-summary">
+  <h1>{{ currentCategoryName }} - Results</h1>
+  <div class="summary-body">
+    Grade: {{ earnedPoints }}
+    <br />
+    <br />
+    You translated {{ wordsGuessed }} out of {{ totalAttempts }} words
+    correctly.
+    <div class="translated-words">
+      <div *ngFor="let word of currentWord; let i = index" class="word-pair">
+        <div class="source-word">Source: {{ word.origin }}</div>
+        <div class="target-word">Target: {{ word.target }}</div>
+        <span *ngIf="wasCorrectGuess(i)">✔️</span>
+        <span *ngIf="!wasCorrectGuess(i)">❌</span>
+      </div>
+    </div>
+  </div>
+</div>

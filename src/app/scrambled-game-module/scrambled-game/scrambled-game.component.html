@@ -1,0 +1,57 @@
+<div class="header">
+  <div class="exit-button"><app-exit-game-button></app-exit-game-button></div>
+  <h1 class="title">Scrambled Word Game - {{ currentCategory?.name }}</h1>
+  <div class="points-container">
+    <app-points-display [earnedPoints]="totalPoints"></app-points-display>
+  </div>
+</div>
+
+<div *ngIf="!isGameOver()" class="game-content">
+  <p>
+    Hebrew Translation:
+    <span>{{ currentCategory!.words[currentWordShownIndex].target }}</span>
+  </p>
+  <p>
+    Scrambled Letters: <span>{{ scrambledWord }}</span>
+  </p>
+  <label for="guessInput">Your Guess:</label>
+  <input
+    id="guessInput"
+    type="text"
+    [(ngModel)]="userGuess"
+    placeholder="Type the correct word here"
+    pattern="[a-zA-Z ]*"
+    #inputField="ngModel"
+    [disabled]="isGameOver()"
+  />
+  <mat-error *ngIf="inputField.invalid"
+    >Only English letters must be entered</mat-error
+  >
+  <div class="button-row">
+    <div class="button-column">
+      <button mat-raised-button color="primary" (click)="verifyGuess()">
+        Check Guess
+      </button>
+    </div>
+    <div class="button-column">
+      <button mat-raised-button color="warn" (click)="clearGuess()">
+        Reset
+      </button>
+    </div>
+  </div>
+  <mat-progress-bar
+    mode="determinate"
+    [value]="progressValue()"
+  ></mat-progress-bar>
+</div>
+
+<div *ngIf="isGameOver()" class="game-summary">
+  <app-scrambled-summary
+    [currentCategoryName]="currentCategory?.name"
+    [totalAttempts]="totalAttempts"
+    [wordsGuessed]="wordsGuessed"
+    [currentWord]="currentWord"
+    [earnedPoints]="totalPoints"
+    [userGuesses]="userGuesses"
+  ></app-scrambled-summary>
+</div>

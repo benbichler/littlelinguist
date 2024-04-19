@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ScrambledGameModuleComponent } from './scrambled-game-module.component';
+import { ScrambledGameModuleComponent } from './scrambled-game.component';
 
 describe('ScrambledGameModuleComponent', () => {
   let component: ScrambledGameModuleComponent;
