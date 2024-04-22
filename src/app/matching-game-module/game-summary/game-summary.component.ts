@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { TranslatedWord } from '../shared/model/translateword';
+import { TranslatedWord } from '../../shared/model/translateword';
 import { NgFor } from '@angular/common';
 @Component({
   selector: 'app-game-summary',

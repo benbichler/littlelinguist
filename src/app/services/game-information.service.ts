@@ -12,14 +12,21 @@ export class GameInformationService {
       'Matching Game',
       "Match the word and it's correct translation",
       GameDifficulty.EASY,
-      'matchingame',
+      'matchingame'
     ),
     new GameProfile(
       2,
       'Scrambled Words Game',
       'Unscramble the words to find the correct answer',
       GameDifficulty.MEDIUM,
-      'scrambledgame',
+      'scrambledgame'
+    ),
+    new GameProfile(
+      3,
+      'Word Sorter Game',
+      'Sort the words shown and decide which category they belong to',
+      GameDifficulty.HARD,
+      'wordsortergame'
     ),
   ];
 

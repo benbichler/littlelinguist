@@ -6,6 +6,7 @@ import { MatchingGameComponent } from './matching-game-module/matching-game/matc
 import { ExplanationOnGameComponent } from './structure/explanation-on-game/explanation-on-game.component';
 import { DashboardViewComponent } from './dashboard-view/dashboard-view.component';
 import { ScrambledGameModuleComponent } from './scrambled-game-module/scrambled-game/scrambled-game.component';
+import { WordSorterGameComponent } from './word-sorter-game-module/word-sorter-game/word-sorter-game.component';
 
 export const routes: Routes = [
   { path: '', component: DashboardViewComponent },
@@ -18,5 +19,9 @@ export const routes: Routes = [
   {
     path: 'scrambledgame/:currentCategoryId',
     component: ScrambledGameModuleComponent,
+  },
+  {
+    path: 'wordsortergame/:currentCategoryId',
+    component: WordSorterGameComponent,
   },
 ];

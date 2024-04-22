@@ -1,0 +1,41 @@
+<!-- word-sorter-game.component.html -->
+<div class="game-container">
+  <div class="header">
+    <app-exit-game-button></app-exit-game-button>
+    <h1>Word Sorter - {{ currentCategory?.name }}</h1>
+    <app-points-display [earnedPoints]="totalPoints"></app-points-display>
+  </div>
+
+  <div *ngIf="!getIsGameOver()" class="game-content">
+    <div class="game-content">
+      <p class="question">
+        Is the word "{{ currentWord?.origin }}" part of the "{{
+          currentCategory?.name
+        }}" category?
+      </p>
+      <div class="button-row">
+        <button mat-raised-button color="primary" (click)="verifyGuess(true)">
+          Yes
+        </button>
+        <button mat-raised-button color="accent" (click)="verifyGuess(false)">
+          No
+        </button>
+      </div>
+    </div>
+
+    <mat-progress-bar
+      mode="determinate"
+      [value]="progressValue()"
+    ></mat-progress-bar>
+  </div>
+</div>
+<div *ngIf="getIsGameOver()" class="game-summary">
+  <app-word-sorter-summary
+    [currentCategoryName]="currentCategory?.name"
+    [totalAttempts]="totalAttempts"
+    [wordsGuessed]="wordsGuessed"
+    [currentWord]="displayWords"
+    [earnedPoints]="totalPoints"
+    [userGuesses]="userGuesses"
+  ></app-word-sorter-summary>
+</div>

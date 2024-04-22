@@ -17,7 +17,7 @@ import { GamePlayed } from '../../shared/model/gameplayed';
 import { ShowPointsComponent } from '../../show-points/show-points.component';
 import { TranslatedWord } from '../../shared/model/translateword';
 import { MatButtonModule } from '@angular/material/button';
-import { GameSummaryComponent } from '../../game-summary/game-summary.component';
+import { GameSummaryComponent } from '../game-summary/game-summary.component';
 import { PointsDisplayComponent } from '../../points-display/points-display.component';
 @Component({
   selector: 'app-matching-game',

@@ -1,0 +1,38 @@
+/* word-sorter-game.component.css */
+.game-container {
+  text-align: center; /* Center-align the text for the header and content */
+  padding: 20px;
+}
+
+.header {
+  margin-bottom: 20px; /* Spacing between the header and the game content */
+}
+
+.question {
+  font-size: 1.25em; /* Larger text for the question */
+  margin-bottom: 20px; /* Spacing between the question and the buttons */
+}
+
+.button-row {
+  display: flex;
+  justify-content: center; /* Center buttons horizontally */
+  gap: 10px; /* Spacing between buttons */
+}
+
+mat-progress-bar {
+  margin-top: 20px; /* Spacing above the progress bar */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.title {
+  flex-grow: 1;
+  text-align: center;
+  margin: 0;
+  font-size: 24px;
+}

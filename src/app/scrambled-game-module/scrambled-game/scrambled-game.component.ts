@@ -9,11 +9,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, NgModel } from '@angular/forms';
-import { GameSummaryComponent } from '../../game-summary/game-summary.component';
+import { GameSummaryComponent } from '../../matching-game-module/game-summary/game-summary.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { PointsDisplayComponent } from '../../points-display/points-display.component';
 import { MatButtonModule } from '@angular/material/button';
-import { ScrambledSummaryComponent } from '../../scrambled-summary/scrambled-summary.component';
+import { ScrambledSummaryComponent } from '../scrambled-summary/scrambled-summary.component';
 import { ScrambledDialogComponent } from '../scrambled-dialog/scrambled-dialog.component';
 import { GamePlayed } from '../../shared/model/gameplayed';
 @Component({
