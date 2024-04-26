@@ -148,20 +148,21 @@ export class WordSorterGameComponent implements OnInit {
       this.currentWord = this.displayWords[this.currentWordIndex];
     } else {
       this.isGameOver = true;
-      this.GameIsOver;
+      this.GameIsOver();
     }
   }
   getIsGameOver(): boolean {
     return this.isGameOver;
   }
+
   private goodGuessDialog(): void {
     this.dialog.open(WordSorterDialogComponent, {
       data: {
         title: 'WELL DONE!',
         message:
-          'You successfully matched the word to the correct category! Continue onto the next word!',
+          'You matched the word to the correct category! Next challenge awaits!',
         buttonText: 'NEXT WORD',
-        dialogType: 'correctWord', // Ensure your dialog component handles this appropriately
+        dialogType: 'correctWord',
       },
     });
   }
@@ -170,9 +171,9 @@ export class WordSorterGameComponent implements OnInit {
     this.dialog.open(WordSorterDialogComponent, {
       data: {
         title: 'GAME OVER!',
-        message: `You are done matching all of the words from ${this.currentCategory?.name}.`, // Using optional chaining for safety
+        message: `You've completed matching all words from ${this.currentCategory?.name}.`,
         buttonText: 'SHOW SUMMARY',
-        dialogType: 'allGuessed', // This should be handled in the dialog component for different styling or actions
+        dialogType: 'allGuessed',
       },
     });
   }
@@ -180,11 +181,10 @@ export class WordSorterGameComponent implements OnInit {
   private showWrongDialog(): void {
     this.dialog.open(WordSorterDialogComponent, {
       data: {
-        title: 'WRONG!',
-        message:
-          'You failed matching the word. Better luck with the next word!',
+        title: 'TRY AGAIN!',
+        message: 'You missed the match. Keep trying for the next one!',
         buttonText: 'NEXT WORD!',
-        dialogType: 'wrong', // This should be handled in the dialog component for different styling or actions
+        dialogType: 'wrong',
       },
     });
   }
