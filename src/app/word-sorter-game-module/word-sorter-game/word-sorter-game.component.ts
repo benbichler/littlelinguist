@@ -10,6 +10,7 @@ import { PointsDisplayComponent } from '../../points-display/points-display.comp
 import { WordSorterSummaryComponent } from '../word-sorter-summary/word-sorter-summary.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { WordSorterDialogComponent } from '../word-sorter-dialog/word-sorter-dialog.component';
+import { GamePlayed } from '../../shared/model/gameplayed';
 
 @Component({
   selector: 'app-word-sorter-game',
@@ -149,8 +150,19 @@ export class WordSorterGameComponent implements OnInit {
     } else {
       this.isGameOver = true;
       this.GameIsOver();
+      if (this.currentCategory) {
+        this.gamePointsService.addGamePlayed(
+          new GamePlayed(
+            this.currentCategory.id,
+            3,
+            new Date(),
+            this.totalPoints
+          )
+        );
+      }
     }
   }
+
   getIsGameOver(): boolean {
     return this.isGameOver;
   }

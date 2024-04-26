@@ -23,7 +23,7 @@ export class HeaderComponent {
   constructor(private router: Router) {}
 
   navigateHome() {
-    this.router.navigate(['/cards']);
+    this.router.navigate(['']);
   }
   showDashboard() {
     this.router.navigate(['']);

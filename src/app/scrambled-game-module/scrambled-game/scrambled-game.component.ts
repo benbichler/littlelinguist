@@ -142,7 +142,12 @@ export class ScrambledGameModuleComponent implements OnInit {
     if (this.isGameOver()) {
       if (this.currentCategory) {
         this.gamePointsService.addGamePlayed(
-          new GamePlayed(this.currentCategory.id, 2, this.totalPoints)
+          new GamePlayed(
+            this.currentCategory.id,
+            2,
+            new Date(),
+            this.totalPoints
+          )
         );
       }
       this.GameIsOver();

@@ -229,7 +229,12 @@ export class MatchingGameComponent implements OnInit {
           if (this.isGameOver()) {
             this.completedGameDialog();
             this.GamePointsService.addGamePlayed(
-              new GamePlayed(this.currentCategory!.id, 1, this.totalPoints)
+              new GamePlayed(
+                this.currentCategory!.id,
+                1,
+                new Date(),
+                this.totalPoints
+              )
             );
           }
         }
@@ -268,7 +273,12 @@ export class MatchingGameComponent implements OnInit {
           if (this.isGameOver()) {
             this.completedGameDialog();
             this.GamePointsService.addGamePlayed(
-              new GamePlayed(this.currentCategory!.id, 1, this.totalPoints)
+              new GamePlayed(
+                this.currentCategory!.id,
+                1,
+                new Date(),
+                this.totalPoints
+              )
             );
           }
         }

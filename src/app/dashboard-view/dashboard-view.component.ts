@@ -12,12 +12,16 @@ import { GamePointsService } from '../services/game-points.service';
 export class DashboardViewComponent implements OnInit {
   TotalPointsInAllGames: number = 0;
   gamesPlayedOverall: GamePlayed[] = [];
+  mostPlayedCategory: string = '';
+  perfectGamesPercentage: number = 0;
 
   constructor(private gamePointsService: GamePointsService) {}
 
   ngOnInit(): void {
     this.gamesPlayedOverall = this.gamePointsService.list();
     this.calculateTotalPoints();
+    this.calculateMostPlayedCategory();
+    this.calculatePerfectGamesPercentage();
   }
 
   calculateTotalPoints(): void {
@@ -25,5 +29,18 @@ export class DashboardViewComponent implements OnInit {
     for (const pointInOneGame of pointsInGames) {
       this.TotalPointsInAllGames += pointInOneGame.amountOfPoints;
     }
+  }
+
+  calculateMostPlayedCategory(): void {}
+
+  calculatePerfectGamesPercentage(): void {
+    let perfectGamesCount = 0;
+    this.gamesPlayedOverall.forEach((game) => {
+      if (game.amountOfPoints === 100) {
+        perfectGamesCount++;
+      }
+    });
+    let rawPercentage = perfectGamesCount / this.gamesPlayedOverall.length;
+    this.perfectGamesPercentage = parseFloat(rawPercentage.toFixed(2));
   }
 }

@@ -12,7 +12,9 @@ span {
 }
 
 .info-card,
-.points-card {
+.points-card,
+.perfect-games-card,
+.category-most-played-card {
   background-color: #e91e63;
   text-align: center;
   margin: 10px;
@@ -25,7 +27,9 @@ span {
 }
 
 .title,
-.points-title {
+.points-title,
+.perfect-games-title,
+.most-played-title {
   margin-top: 20px;
   font-size: 22px;
 }
@@ -37,10 +41,4 @@ mat-card-content {
   font-size: 80px;
   margin-top: 10px;
   color: #e0e0e0;
-}
-
-.session-count,
-.points-count {
-  font-size: 18px;
-  margin-top: 15px;
 }
