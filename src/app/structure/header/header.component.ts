@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,13 +18,4 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
-export class HeaderComponent {
-  constructor(private router: Router) {}
-
-  navigateHome() {
-    this.router.navigate(['']);
-  }
-  showDashboard() {
-    this.router.navigate(['']);
-  }
-}
+export class HeaderComponent {}
