@@ -33,7 +33,29 @@ export class DashboardViewComponent implements OnInit {
     }
   }
 
-  calculateMostPlayedCategory(): void {}
+  calculateMostPlayedCategory(): void {
+    const categoryCounts = new Map<number, number>();
+
+    for (let i = 0; i < this.gamesPlayedOverall.length; i++) {
+      const category = this.gamesPlayedOverall[i].chosenCategoryID;
+      const count = categoryCounts.get(category) || 0;
+      categoryCounts.set(category, count + 1);
+    }
+    let maxCount = 0;
+    let mostPlayedCategory: number | undefined;
+    for (let [category, count] of categoryCounts.entries()) {
+      if (count > maxCount) {
+        maxCount = count;
+        mostPlayedCategory = category;
+      }
+    }
+
+    if (mostPlayedCategory !== undefined) {
+      this.mostPlayedCategory = mostPlayedCategory.toString();
+    } else {
+      this.mostPlayedCategory = '';
+    }
+  }
 
   calculatePerfectGamesPercentage(): void {
     let perfectGamesCount = 0;
