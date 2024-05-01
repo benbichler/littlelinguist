@@ -8,7 +8,7 @@ import { ExitGameButtonComponent } from '../../exit-game-button/exit-game-button
 import { MatIconModule } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { GameSummaryComponent } from '../../matching-game-module/game-summary/game-summary.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { PointsDisplayComponent } from '../../points-display/points-display.component';
@@ -102,7 +102,7 @@ export class ScrambledGameModuleComponent implements OnInit {
   }
 
   mixUpLetters(word: string): string {
-    let scrambledLetters = word
+    const scrambledLetters = word
       .split('')
       .sort(() => 0.5 - Math.random())
       .join('');
@@ -133,7 +133,7 @@ export class ScrambledGameModuleComponent implements OnInit {
 
     this.totalAttempts++;
     if (isCorrectGuess) {
-      this.totalPoints++;
+      this.totalPoints += this.calculatePoints();
       this.wordsGuessed++;
     }
 
@@ -163,6 +163,11 @@ export class ScrambledGameModuleComponent implements OnInit {
     this.userGuess = '';
   }
 
+  calculatePoints(): number {
+    const calculation = (1 / this.currentCategory!.words.length) * 100;
+    return Math.round(calculation);
+  }
+
   isGameOver(): boolean {
     return this.currentWordShownIndex === this.currentCategory?.words.length;
   }
@@ -185,8 +190,7 @@ export class ScrambledGameModuleComponent implements OnInit {
 
   progressValue(): number {
     const progress =
-      ((this.currentWordShownIndex + 1) / this.currentCategory!.words.length) *
-      100;
+      (this.currentWordShownIndex / this.currentCategory!.words.length) * 100;
     console.log('Progress Value:', progress); // Check the console for this output
     return progress;
   }

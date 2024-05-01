@@ -7,6 +7,13 @@ import {
 } from '@angular/material/dialog';
 import { NgClass } from '@angular/common';
 
+export interface DialogData {
+  dialogType: 'correctWord' | 'wrong' | 'allGuessed';
+  title: string;
+  message: string;
+  buttonText: string;
+}
+
 @Component({
   selector: 'app-scrambled-dialog',
   standalone: true,
@@ -17,7 +24,7 @@ import { NgClass } from '@angular/common';
 export class ScrambledDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<ScrambledDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {}
 
   onClose(): void {

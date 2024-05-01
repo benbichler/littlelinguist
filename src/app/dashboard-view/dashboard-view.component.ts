@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { GamePlayed } from '../shared/model/gameplayed';
 import { GamePointsService } from '../services/game-points.service';
+import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-dashboard-view',
   standalone: true,
-  imports: [MatCardModule],
+  imports: [MatCardModule, CommonModule],
   templateUrl: './dashboard-view.component.html',
   styleUrl: './dashboard-view.component.css',
 })
@@ -40,7 +42,7 @@ export class DashboardViewComponent implements OnInit {
         perfectGamesCount++;
       }
     });
-    let rawPercentage = perfectGamesCount / this.gamesPlayedOverall.length;
-    this.perfectGamesPercentage = parseFloat(rawPercentage.toFixed(2));
+    this.perfectGamesPercentage =
+      perfectGamesCount / this.gamesPlayedOverall.length;
   }
 }

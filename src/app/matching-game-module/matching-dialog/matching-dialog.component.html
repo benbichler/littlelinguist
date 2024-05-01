@@ -1,9 +1,9 @@
 <div
   class="dialog"
   [ngClass]="{
-    'matched-dialog': data.dialogType === 'matched',
+    'matched-dialog': data.dialogType === 'correctWord',
     'wrong-dialog': data.dialogType === 'wrong',
-    'game-over-dialog': data.dialogType === 'gameover'
+    'game-over-dialog': data.dialogType === 'allGuessed'
   }"
 >
   <mat-dialog-content class="dialog-title">{{ data.title }}</mat-dialog-content>

@@ -126,18 +126,22 @@ export class WordSorterGameComponent implements OnInit {
 
     if (guessWasCorrect) {
       this.goodGuessDialog(); // Open the success dialog
-      this.totalPoints += 10;
+      this.totalPoints += this.calculatePoints();
       this.wordsGuessed++;
     } else {
       this.showWrongDialog(); // Open the failure dialog
-      this.totalPoints--;
     }
     this.moveToNextWord();
     this.totalAttempts++;
   }
+
+  calculatePoints(): number {
+    const calculation = 100 / this.displayWords.length;
+    return Math.round(calculation);
+  }
+
   progressValue(): number {
-    const progress =
-      ((this.currentWordIndex + 1) / this.currentCategory!.words.length) * 100;
+    const progress = (this.currentWordIndex / this.displayWords.length) * 100;
     console.log('Progress Value:', progress); // Check the console for this output
     return progress;
   }

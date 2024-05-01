@@ -89,37 +89,25 @@ export class MatchingGameComponent implements OnInit {
       this.gameStarted = true;
     } else {
       console.log('Not enough words, setting message...'); // Debugging
-      this.preventGameStart();
+      this.gameStarted = false;
       this.showMessageIfNotEnough = `This category does not have enough words to start the game.
       Press the button to be forwarded to the category selection page.
       Choose another category and dive straight into a game!`;
     }
   }
-  private preventGameStart(): void {
-    this.gameStarted = false;
-  }
+
   private hasEnoughWords(category: Category): boolean {
     return category.words && category.words.length >= 5;
   }
 
   private initializeGameWords(category: Category): void {
-    if (category.words.length < MatchingGameComponent.WORDS_PER_GAME) {
-      this.showMessageIfNotEnough = `This category does not have enough words to start the game.
-      Press the button to be forwarded to the category selection page.
-      Choose another category and dive straight into a game!`;
-      return; // Exit the function early if not enough words are available
-    }
-    // Select the first 'count' words directly without shuffling
     const tempWords = this.selectRandomWords(
       category.words,
       MatchingGameComponent.WORDS_PER_GAME
     );
     console.log('Selected words:', tempWords);
     // Assign English words directly
-    this.chosenWordsEnglish = tempWords.map((word) => ({
-      origin: word.origin,
-      target: word.target,
-    }));
+    this.chosenWordsEnglish = tempWords;
     // Shuffle only the Hebrew translations using Math.random() - 0.5
     this.chosenWordsHebrew = tempWords
       .map((word) => word.target)
@@ -141,7 +129,8 @@ export class MatchingGameComponent implements OnInit {
     count: number
   ): TranslatedWord[] {
     // This function just takes the first 'count' words from the list
-    return words.slice(0, count);
+    const radnomCopy = [...words].sort();
+    return radnomCopy.slice(0, count);
   }
 
   private updateWordStatusToSelected(
@@ -167,8 +156,6 @@ export class MatchingGameComponent implements OnInit {
   private calculatePoints(isCorrect: boolean): void {
     if (isCorrect) {
       this.totalPoints += this.totalCurrentGamePoints;
-    } else {
-      this.totalPoints -= 2;
     }
   }
 
