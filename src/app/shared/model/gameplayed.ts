@@ -3,6 +3,7 @@ export class GamePlayed {
   gamePlayedID: number;
   datePlayed = new Date();
   amountOfPoints: number;
+  secondsPlayed: number;
   secondsLeftInGame: number;
 
   constructor(
@@ -10,12 +11,14 @@ export class GamePlayed {
     gamePlayedID: number,
     datePlayed: Date,
     amountOfPoints: number,
+    secondsPlayed: number,
     secondsLeftInGame: number
   ) {
     this.chosenCategoryID = chosenCategoryID;
     this.gamePlayedID = gamePlayedID;
     this.amountOfPoints = amountOfPoints;
     this.datePlayed = datePlayed;
+    this.secondsPlayed = secondsPlayed;
     this.secondsLeftInGame = secondsLeftInGame;
   }
 }

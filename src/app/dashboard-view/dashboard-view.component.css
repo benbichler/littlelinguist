@@ -14,7 +14,8 @@ span {
 .info-card,
 .points-card,
 .perfect-games-card,
-.category-most-played-card {
+.category-most-played-card,
+.average-gametime-card {
   background-color: #e91e63;
   text-align: center;
   margin: 10px;
@@ -29,7 +30,8 @@ span {
 .title,
 .points-title,
 .perfect-games-title,
-.most-played-title {
+.most-played-title,
+.average-gametime-title {
   margin-top: 20px;
   font-size: 22px;
 }

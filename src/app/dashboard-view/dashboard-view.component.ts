@@ -16,6 +16,8 @@ export class DashboardViewComponent implements OnInit {
   gamesPlayedOverall: GamePlayed[] = [];
   mostPlayedCategory: string = '';
   perfectGamesPercentage: number = 0;
+  averageTimePerGame: number = 0;
+  totalPlayedTimeInAllGames: number = 0;
 
   constructor(private gamePointsService: GamePointsService) {}
 
@@ -24,6 +26,18 @@ export class DashboardViewComponent implements OnInit {
     this.calculateTotalPoints();
     this.calculateMostPlayedCategory();
     this.calculatePerfectGamesPercentage();
+    this.totalTimePlayed();
+  }
+
+  totalTimePlayed(): void {
+    this.totalPlayedTimeInAllGames = 0;
+    const games = this.gamePointsService.list();
+    console.log('Games:', games); // Check if games array is not empty
+    for (const game of games) {
+      console.log('Game seconds played:', game.secondsPlayed); // Check the value of secondsPlayed for each game
+      this.totalPlayedTimeInAllGames += game.secondsPlayed;
+    }
+    console.log('Total played time:', this.totalPlayedTimeInAllGames); // Check the total played time
   }
 
   calculateTotalPoints(): void {

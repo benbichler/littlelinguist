@@ -4,7 +4,7 @@
   <div class="points-container">
     <app-points-display [earnedPoints]="totalPoints"></app-points-display>
   </div>
-  <div>
+  <div *ngIf="!isGameOver()">
     <app-timer
       [duration]="timeGivenForGame"
       (timerFinished)="handleTimerFinished()"

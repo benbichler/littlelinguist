@@ -152,6 +152,7 @@ export class ScrambledGameModuleComponent implements OnInit {
             2,
             new Date(),
             this.totalPoints,
+            this.timeGivenForGame,
             this.timeLeftForGame
           )
         );
@@ -209,6 +210,33 @@ export class ScrambledGameModuleComponent implements OnInit {
     this.timerFinished = true;
   }
 
+  reportTimeLeftHandler(timeLeft: number): void {
+    this.timeLeftForGame = timeLeft;
+
+    if (this.timeLeftForGame === 0) {
+      // If time is up, display the game summary screen
+      this.openDialog(
+        'Time is up!',
+        `You have finished the game with ${this.totalPoints} points.`,
+        'SHOW GAME SUMMARY',
+        'timeout'
+      );
+
+      // Report game completion to the game points service
+      if (this.currentCategory) {
+        this.gamePointsService.addGamePlayed(
+          new GamePlayed(
+            this.currentCategory.id,
+            2,
+            new Date(),
+            this.totalPoints,
+            this.timeGivenForGame,
+            this.timeLeftForGame
+          )
+        );
+      }
+    }
+  }
   openDialog(
     title: string,
     message: string,

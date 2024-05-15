@@ -226,6 +226,7 @@ export class MatchingGameComponent implements OnInit {
                 1,
                 new Date(),
                 this.totalPoints,
+                this.timeGivenForGame,
                 this.timeLeftForGame
               )
             );
@@ -271,6 +272,7 @@ export class MatchingGameComponent implements OnInit {
                 1,
                 new Date(),
                 this.totalPoints,
+                this.timeGivenForGame,
                 this.timeLeftForGame
               )
             );
@@ -295,6 +297,32 @@ export class MatchingGameComponent implements OnInit {
 
   isGameOver(): boolean {
     return this.checkIfAllWordsMarkedDisabled() || this.timerFinished;
+  }
+
+  reportTimeLeftHandler(timeLeft: number): void {
+    this.timeLeftForGame = timeLeft;
+
+    if (this.timeLeftForGame === 0) {
+      // אם הזמן נגמר, הצג את מסך סיכום המשחק
+      this.openDialog(
+        'Time is up!',
+        `You have finished the game with ${this.totalPoints} points.`,
+        'SHOW GAME SUMMARY',
+        'timeout'
+      );
+
+      // דווח לשירות played games על סיום המשחק
+      this.GamePointsService.addGamePlayed(
+        new GamePlayed(
+          this.currentCategory!.id,
+          1,
+          new Date(),
+          this.totalPoints,
+          this.timeGivenForGame,
+          this.timeLeftForGame
+        )
+      );
+    }
   }
 
   checkIfAllWordsMarkedDisabled(): boolean {

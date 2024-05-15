@@ -166,6 +166,7 @@ export class WordSorterGameComponent implements OnInit {
             3,
             new Date(),
             this.totalPoints,
+            this.timeGivenForGame,
             this.timeLeftForGame
           )
         );
