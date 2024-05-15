@@ -2,8 +2,14 @@
 <div class="game-container">
   <div class="header">
     <app-exit-game-button></app-exit-game-button>
-    <h1>Word Sorter - {{ currentCategory?.name }}</h1>
-    <app-points-display [earnedPoints]="totalPoints"></app-points-display>
+    <h1 class="title">Word Sorter - {{ currentCategory?.name }}</h1>
+    <div class="points-timer-container">
+      <app-points-display [earnedPoints]="totalPoints"></app-points-display>
+      <app-timer
+        [duration]="timeGivenForGame"
+        (timerFinished)="handleTimerFinished()"
+      ></app-timer>
+    </div>
   </div>
 
   <div *ngIf="!getIsGameOver()" class="game-content">

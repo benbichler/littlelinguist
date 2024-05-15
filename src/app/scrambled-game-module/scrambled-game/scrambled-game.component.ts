@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ScrambledSummaryComponent } from '../scrambled-summary/scrambled-summary.component';
 import { ScrambledDialogComponent } from '../scrambled-dialog/scrambled-dialog.component';
 import { GamePlayed } from '../../shared/model/gameplayed';
+import { TimerComponent } from '../../timer/timer.component';
 @Component({
   selector: 'app-scrambled-game-module',
   standalone: true,
@@ -32,10 +33,14 @@ import { GamePlayed } from '../../shared/model/gameplayed';
     MatProgressBarModule,
     PointsDisplayComponent,
     FormsModule,
+    TimerComponent,
   ],
 })
 export class ScrambledGameModuleComponent implements OnInit {
   @Input() currentCategoryId?: string;
+  readonly timeGivenForGame: number = 180;
+  timeLeftForGame: number = 0;
+  timerFinished: boolean = false;
   currentCategory?: Category;
   currentWordShownIndex: number = 0;
   currentWord: TranslatedWord[] = [];
@@ -146,7 +151,8 @@ export class ScrambledGameModuleComponent implements OnInit {
             this.currentCategory.id,
             2,
             new Date(),
-            this.totalPoints
+            this.totalPoints,
+            this.timeLeftForGame
           )
         );
       }
@@ -169,7 +175,10 @@ export class ScrambledGameModuleComponent implements OnInit {
   }
 
   isGameOver(): boolean {
-    return this.currentWordShownIndex === this.currentCategory?.words.length;
+    return (
+      this.currentWordShownIndex === this.currentCategory?.words.length ||
+      this.timerFinished
+    );
   }
 
   prepareNextWord(): void {
@@ -193,6 +202,11 @@ export class ScrambledGameModuleComponent implements OnInit {
       (this.currentWordShownIndex / this.currentCategory!.words.length) * 100;
     console.log('Progress Value:', progress); // Check the console for this output
     return progress;
+  }
+
+  handleTimerFinished(): void {
+    console.log('Game over! Timer finished');
+    this.timerFinished = true;
   }
 
   openDialog(

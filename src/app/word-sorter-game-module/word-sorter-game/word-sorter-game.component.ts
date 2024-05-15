@@ -11,10 +11,13 @@ import { WordSorterSummaryComponent } from '../word-sorter-summary/word-sorter-s
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { WordSorterDialogComponent } from '../word-sorter-dialog/word-sorter-dialog.component';
 import { GamePlayed } from '../../shared/model/gameplayed';
+import { TimerComponent } from '../../timer/timer.component';
 
 @Component({
   selector: 'app-word-sorter-game',
   standalone: true,
+  templateUrl: './word-sorter-game.component.html',
+  styleUrl: './word-sorter-game.component.css',
   imports: [
     NgFor,
     ExitGameButtonComponent,
@@ -22,11 +25,13 @@ import { GamePlayed } from '../../shared/model/gameplayed';
     NgIf,
     WordSorterSummaryComponent,
     MatProgressBarModule,
+    TimerComponent,
   ],
-  templateUrl: './word-sorter-game.component.html',
-  styleUrl: './word-sorter-game.component.css',
 })
 export class WordSorterGameComponent implements OnInit {
+  readonly timeGivenForGame: number = 180;
+  timeLeftForGame: number = 0;
+  timerFinished: boolean = false;
   @Input() currentCategoryId?: string;
   currentCategory?: Category;
   randomCategory?: Category;
@@ -160,7 +165,8 @@ export class WordSorterGameComponent implements OnInit {
             this.currentCategory.id,
             3,
             new Date(),
-            this.totalPoints
+            this.totalPoints,
+            this.timeLeftForGame
           )
         );
       }
@@ -168,9 +174,13 @@ export class WordSorterGameComponent implements OnInit {
   }
 
   getIsGameOver(): boolean {
-    return this.isGameOver;
+    return this.isGameOver || this.timerFinished;
   }
 
+  handleTimerFinished(): void {
+    console.log('Game over! Timer finished');
+    this.timerFinished = true;
+  }
   private goodGuessDialog(): void {
     this.dialog.open(WordSorterDialogComponent, {
       data: {

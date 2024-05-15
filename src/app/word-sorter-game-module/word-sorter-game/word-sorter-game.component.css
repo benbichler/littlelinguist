@@ -36,3 +36,8 @@ mat-progress-bar {
   margin: 0;
   font-size: 24px;
 }
+
+.points-timer-container {
+  display: flex;
+  align-items: center;
+}

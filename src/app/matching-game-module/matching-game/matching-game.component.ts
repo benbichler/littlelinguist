@@ -19,6 +19,7 @@ import { TranslatedWord } from '../../shared/model/translateword';
 import { MatButtonModule } from '@angular/material/button';
 import { GameSummaryComponent } from '../game-summary/game-summary.component';
 import { PointsDisplayComponent } from '../../points-display/points-display.component';
+import { TimerComponent } from '../../timer/timer.component';
 @Component({
   selector: 'app-matching-game',
   standalone: true,
@@ -39,6 +40,7 @@ import { PointsDisplayComponent } from '../../points-display/points-display.comp
     ExitGameButtonComponent,
     GameSummaryComponent,
     PointsDisplayComponent,
+    TimerComponent,
   ],
 })
 export class MatchingGameComponent implements OnInit {
@@ -48,6 +50,9 @@ export class MatchingGameComponent implements OnInit {
     private router: Router,
     private GamePointsService: GamePointsService
   ) {}
+  readonly timeGivenForGame: number = 120;
+  timeLeftForGame: number = 0;
+  timerFinished: boolean = false;
   currentCategory?: Category;
   chosenWordsEnglish: TranslatedWord[] = [];
   chosenWordsHebrew: string[] = [];
@@ -220,7 +225,8 @@ export class MatchingGameComponent implements OnInit {
                 this.currentCategory!.id,
                 1,
                 new Date(),
-                this.totalPoints
+                this.totalPoints,
+                this.timeLeftForGame
               )
             );
           }
@@ -264,7 +270,8 @@ export class MatchingGameComponent implements OnInit {
                 this.currentCategory!.id,
                 1,
                 new Date(),
-                this.totalPoints
+                this.totalPoints,
+                this.timeLeftForGame
               )
             );
           }
@@ -287,7 +294,7 @@ export class MatchingGameComponent implements OnInit {
   }
 
   isGameOver(): boolean {
-    return this.checkIfAllWordsMarkedDisabled();
+    return this.checkIfAllWordsMarkedDisabled() || this.timerFinished;
   }
 
   checkIfAllWordsMarkedDisabled(): boolean {
@@ -300,6 +307,11 @@ export class MatchingGameComponent implements OnInit {
       }
     }
     return true;
+  }
+
+  handleTimerFinished(): void {
+    console.log('Game over! Timer finished');
+    this.timerFinished = true;
   }
 
   exit() {

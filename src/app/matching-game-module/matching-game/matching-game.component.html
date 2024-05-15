@@ -6,6 +6,12 @@
   <div class="points-container">
     <app-points-display [earnedPoints]="totalPoints"></app-points-display>
   </div>
+  <div>
+    <app-timer
+      [duration]="timeGivenForGame"
+      (timerFinished)="handleTimerFinished()"
+    ></app-timer>
+  </div>
 </div>
 
 <div *ngIf="showMessageIfNotEnough" class="handleMessageSit">

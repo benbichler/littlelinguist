@@ -4,6 +4,12 @@
   <div class="points-container">
     <app-points-display [earnedPoints]="totalPoints"></app-points-display>
   </div>
+  <div>
+    <app-timer
+      [duration]="timeGivenForGame"
+      (timerFinished)="handleTimerFinished()"
+    ></app-timer>
+  </div>
 </div>
 
 <div *ngIf="!isGameOver()" class="game-content">
@@ -45,7 +51,7 @@
   ></mat-progress-bar>
 </div>
 
-<div *ngIf="isGameOver()" class="game-summary">
+<div *ngIf="isGameOver() || timerFinished" class="game-summary">
   <app-scrambled-summary
     [currentCategoryName]="currentCategory?.name"
     [totalAttempts]="totalAttempts"
