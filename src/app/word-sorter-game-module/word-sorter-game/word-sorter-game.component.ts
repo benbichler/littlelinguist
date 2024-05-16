@@ -52,6 +52,7 @@ export class WordSorterGameComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCurrentCategory();
+    this.timeLeftForGame = this.timeGivenForGame;
   }
 
   loadCurrentCategory(): void {
@@ -147,7 +148,6 @@ export class WordSorterGameComponent implements OnInit {
 
   progressValue(): number {
     const progress = (this.currentWordIndex / this.displayWords.length) * 100;
-    console.log('Progress Value:', progress); // Check the console for this output
     return progress;
   }
 
@@ -178,10 +178,16 @@ export class WordSorterGameComponent implements OnInit {
     return this.isGameOver || this.timerFinished;
   }
 
+  handleTimer(): void {
+    this.timeLeftForGame--;
+    console.log('Time left:', this.timeLeftForGame);
+  }
+
   handleTimerFinished(): void {
     console.log('Game over! Timer finished');
     this.timerFinished = true;
   }
+
   private goodGuessDialog(): void {
     this.dialog.open(WordSorterDialogComponent, {
       data: {

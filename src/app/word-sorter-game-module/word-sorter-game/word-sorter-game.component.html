@@ -9,6 +9,7 @@
         *ngIf="!getIsGameOver()"
         [duration]="timeGivenForGame"
         (timerFinished)="handleTimerFinished()"
+        (elapsedTime)="handleTimer()"
       ></app-timer>
     </div>
   </div>

@@ -69,6 +69,7 @@ export class MatchingGameComponent implements OnInit {
   gameStarted = false;
 
   ngOnInit(): void {
+    this.timeLeftForGame = this.timeGivenForGame;
     this.loadCurrentCategory();
   }
 
@@ -169,7 +170,7 @@ export class MatchingGameComponent implements OnInit {
       'WELL DONE!',
       `You managed to match ${MatchingGameComponent.WORDS_PER_GAME} pairs of words and you've finished the game!`,
       'SHOW GAME SUMMARY',
-      'gameover'
+      'allGuessed'
     );
   }
 
@@ -178,7 +179,7 @@ export class MatchingGameComponent implements OnInit {
       'MATCHED!',
       `You have matched ${this.totalSuccess} words.`,
       'CONTINUE',
-      'matched'
+      'correctWord'
     );
   }
 
@@ -299,32 +300,6 @@ export class MatchingGameComponent implements OnInit {
     return this.checkIfAllWordsMarkedDisabled() || this.timerFinished;
   }
 
-  reportTimeLeftHandler(timeLeft: number): void {
-    this.timeLeftForGame = timeLeft;
-
-    if (this.timeLeftForGame === 0) {
-      // אם הזמן נגמר, הצג את מסך סיכום המשחק
-      this.openDialog(
-        'Time is up!',
-        `You have finished the game with ${this.totalPoints} points.`,
-        'SHOW GAME SUMMARY',
-        'timeout'
-      );
-
-      // דווח לשירות played games על סיום המשחק
-      this.GamePointsService.addGamePlayed(
-        new GamePlayed(
-          this.currentCategory!.id,
-          1,
-          new Date(),
-          this.totalPoints,
-          this.timeGivenForGame,
-          this.timeLeftForGame
-        )
-      );
-    }
-  }
-
   checkIfAllWordsMarkedDisabled(): boolean {
     for (let i = 0; i < this.englishWordStatus.length; i++) {
       if (
@@ -340,6 +315,11 @@ export class MatchingGameComponent implements OnInit {
   handleTimerFinished(): void {
     console.log('Game over! Timer finished');
     this.timerFinished = true;
+  }
+
+  handleTimer(): void {
+    this.timeLeftForGame--;
+    console.log('Time left:', this.timeLeftForGame);
   }
 
   exit() {

@@ -16,8 +16,10 @@ export class DashboardViewComponent implements OnInit {
   gamesPlayedOverall: GamePlayed[] = [];
   mostPlayedCategory: string = '';
   perfectGamesPercentage: number = 0;
-  averageTimePerGame: number = 0;
-  totalPlayedTimeInAllGames: number = 0;
+  totalPlayedTime: number = 0;
+  averageGameTime: number = 0;
+  gamesEndedEarlyCount: number = 0;
+  gamesFinishedOnTimePercent: number = 0;
 
   constructor(private gamePointsService: GamePointsService) {}
 
@@ -27,17 +29,39 @@ export class DashboardViewComponent implements OnInit {
     this.calculateMostPlayedCategory();
     this.calculatePerfectGamesPercentage();
     this.totalTimePlayed();
+    this.averagePlayTimePerGame();
+    this.calculateGamesFinishedEarlyPercent();
+  }
+  calculateGamesFinishedEarlyPercent(): void {
+    this.gamesEndedEarlyCount = 0;
+    const games = this.gamePointsService.list();
+    for (const game of games) {
+      if (game.secondsLeftInGame > 0) {
+        this.gamesEndedEarlyCount++;
+        this.gamesFinishedOnTimePercent =
+          this.gamesEndedEarlyCount / games.length;
+      }
+    }
+  }
+  averagePlayTimePerGame(): void {
+    this.averageGameTime = 0;
+    const games = this.gamePointsService.list();
+    for (const game of games) {
+      const totalTimePlayed = game.secondsPlayed - game.secondsLeftInGame;
+      this.averageGameTime = totalTimePlayed / games.length;
+    }
+    console.log('Average playtime per game:', this.averageGameTime);
   }
 
   totalTimePlayed(): void {
-    this.totalPlayedTimeInAllGames = 0;
+    this.totalPlayedTime = 0;
     const games = this.gamePointsService.list();
     console.log('Games:', games); // Check if games array is not empty
     for (const game of games) {
-      console.log('Game seconds played:', game.secondsPlayed); // Check the value of secondsPlayed for each game
-      this.totalPlayedTimeInAllGames += game.secondsPlayed;
+      const timePlayed = game.secondsPlayed - game.secondsLeftInGame;
+      this.totalPlayedTime += timePlayed;
     }
-    console.log('Total played time:', this.totalPlayedTimeInAllGames); // Check the total played time
+    console.log('Total played time:', this.totalPlayedTime); // Check the total played time
   }
 
   calculateTotalPoints(): void {
