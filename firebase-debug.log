@@ -24,3 +24,4 @@
 [debug] [2024-05-16T12:22:38.679Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/little-linguist-1236f:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
 [debug] [2024-05-16T12:22:38.680Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/little-linguist-1236f [none]
 [debug] [2024-05-16T12:22:39.113Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/little-linguist-1236f 200
+[debug] [2024-05-16T12:22:39.113Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/little-linguist-1236f {"projectId":"little-linguist-1236f","projectNumber":"1059238954258","displayName":"little-linguist","name":"projects/little-linguist-1236f","resources":{"hostingSite":"little-linguist-1236f"},"state":"ACTIVE","etag":"1_9f496c27-425a-43dd-a064-21b9e9088910"}
