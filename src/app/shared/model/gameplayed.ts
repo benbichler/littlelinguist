@@ -10,8 +10,8 @@ export class GamePlayed {
     gamePlayedID: number,
     datePlayed: Date,
     amountOfPoints: number,
-    secondsLeftInGame: number,
-    secondsPlayed: number
+    secondsPlayed: number,
+    secondsLeftInGame: number
   ) {
     this.chosenCategoryID = chosenCategoryID;
     this.gamePlayedID = gamePlayedID;
@@ -19,6 +19,5 @@ export class GamePlayed {
     this.datePlayed = datePlayed;
     this.secondsPlayed = secondsPlayed;
     this.secondsLeftInGame = secondsLeftInGame;
-    this.secondsPlayed = secondsPlayed;
   }
 }

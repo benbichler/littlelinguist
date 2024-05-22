@@ -47,8 +47,8 @@ export class DashboardViewComponent implements OnInit {
     this.averageGameTime = 0;
     const games = this.gamePointsService.list();
     for (const game of games) {
-      const totalTimePlayed = game.secondsPlayed - game.secondsLeftInGame;
-      this.averageGameTime = totalTimePlayed / games.length;
+      const timePlayed = game.secondsPlayed - game.secondsLeftInGame;
+      this.averageGameTime = timePlayed / games.length;
     }
     console.log('Average playtime per game:', this.averageGameTime);
   }
