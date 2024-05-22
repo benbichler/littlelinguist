@@ -24,9 +24,36 @@
 
   <mat-card class="perfect-games-card">
     <div class="perfect-games-title">
-      <mat-card-title> Perfect Games </mat-card-title>
+      <mat-card-title> Perfect Games % </mat-card-title>
       <mat-card-content>
         {{ perfectGamesPercentage | percent }}
+      </mat-card-content>
+    </div>
+  </mat-card>
+
+  <mat-card class="total-gametime-card">
+    <div class="total-gametime-title">
+      <mat-card-title> Total Playtime (SEC) </mat-card-title>
+      <mat-card-content>
+        {{ totalPlayedTime }}
+      </mat-card-content>
+    </div>
+  </mat-card>
+
+  <mat-card class="average-gametime-card">
+    <div class="average-gametime-title">
+      <mat-card-title>Average Gametime (SEC)</mat-card-title>
+      <mat-card-content>
+        {{ averageGameTime }}
+      </mat-card-content>
+    </div>
+  </mat-card>
+
+  <mat-card class="gamesfinishedontime-card">
+    <div class="gamesfinishedontime-title">
+      <mat-card-title>Games Completed On Time %</mat-card-title>
+      <mat-card-content>
+        {{ gamesFinishedOnTimePercent | percent }}
       </mat-card-content>
     </div>
   </mat-card>

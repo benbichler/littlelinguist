@@ -17,16 +17,21 @@ import { MatIconModule } from '@angular/material/icon';
 export class TimerComponent implements OnInit, OnDestroy {
   @Input() duration: number = 0;
   @Output() timerFinished = new EventEmitter<number>();
+  @Output() elapsedTime = new EventEmitter<number>();
   private intervalId?: any;
+  public timeLeft: number = 0;
 
   ngOnInit(): void {
+    this.timeLeft = this.duration;
     this.intervalId = setInterval(() => this.reportTimeLeft(), 1000);
   }
 
   reportTimeLeft() {
-    this.duration--;
-    if (this.duration === 0) {
-      this.timerFinished.emit(this.duration);
+    this.timeLeft--;
+    this.elapsedTime.emit(this.timeLeft);
+
+    if (this.timeLeft === 0) {
+      this.timerFinished.emit();
       this.stopTimer();
     }
   }
@@ -44,7 +49,8 @@ export class TimerComponent implements OnInit, OnDestroy {
   formatTime(timeInSeconds: number): string {
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = timeInSeconds % 60;
-    return `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    return `${minutes < 10 ? '0' : ''}${minutes}:${
+      seconds < 10 ? '0' : ''
+    }${seconds}`;
   }
-  
 }

@@ -6,10 +6,11 @@
   <div class="points-container">
     <app-points-display [earnedPoints]="totalPoints"></app-points-display>
   </div>
-  <div>
+  <div *ngIf="!isGameOver()">
     <app-timer
       [duration]="timeGivenForGame"
       (timerFinished)="handleTimerFinished()"
+      (elapsedTime)="handleTimer()"
     ></app-timer>
   </div>
 </div>
@@ -22,7 +23,10 @@
   </button>
 </div>
 
-<div *ngIf="gameStarted && !isGameOver()" class="game-content">
+<div
+  *ngIf="(gameStarted && !isGameOver()) || timerFinished"
+  class="game-content"
+>
   <div class="word-columns">
     <div class="column english-words">
       <app-card-word
@@ -43,7 +47,7 @@
   </div>
 </div>
 
-<div *ngIf="gameStarted && isGameOver()">
+<div *ngIf="(gameStarted && isGameOver()) || timerFinished">
   <app-game-summary
     [currentCategoryName]="currentCategory?.name"
     [chosenWords]="chosenWordsEnglish"

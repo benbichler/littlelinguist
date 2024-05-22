@@ -69,6 +69,7 @@ export class MatchingGameComponent implements OnInit {
   gameStarted = false;
 
   ngOnInit(): void {
+    this.timeLeftForGame = this.timeGivenForGame;
     this.loadCurrentCategory();
   }
 
@@ -169,7 +170,7 @@ export class MatchingGameComponent implements OnInit {
       'WELL DONE!',
       `You managed to match ${MatchingGameComponent.WORDS_PER_GAME} pairs of words and you've finished the game!`,
       'SHOW GAME SUMMARY',
-      'gameover'
+      'allGuessed'
     );
   }
 
@@ -178,7 +179,7 @@ export class MatchingGameComponent implements OnInit {
       'MATCHED!',
       `You have matched ${this.totalSuccess} words.`,
       'CONTINUE',
-      'matched'
+      'correctWord'
     );
   }
 
@@ -226,6 +227,7 @@ export class MatchingGameComponent implements OnInit {
                 1,
                 new Date(),
                 this.totalPoints,
+                this.timeGivenForGame,
                 this.timeLeftForGame
               )
             );
@@ -271,6 +273,7 @@ export class MatchingGameComponent implements OnInit {
                 1,
                 new Date(),
                 this.totalPoints,
+                this.timeGivenForGame,
                 this.timeLeftForGame
               )
             );
@@ -312,6 +315,11 @@ export class MatchingGameComponent implements OnInit {
   handleTimerFinished(): void {
     console.log('Game over! Timer finished');
     this.timerFinished = true;
+  }
+
+  handleTimer(): void {
+    this.timeLeftForGame--;
+    console.log('Time left:', this.timeLeftForGame);
   }
 
   exit() {

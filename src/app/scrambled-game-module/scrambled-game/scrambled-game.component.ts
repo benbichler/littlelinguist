@@ -93,6 +93,8 @@ export class ScrambledGameModuleComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.timeLeftForGame = this.timeGivenForGame;
+
     if (this.currentCategoryId) {
       this.currentCategory = this.categoryService.get(
         parseInt(this.currentCategoryId)
@@ -152,6 +154,7 @@ export class ScrambledGameModuleComponent implements OnInit {
             2,
             new Date(),
             this.totalPoints,
+            this.timeGivenForGame,
             this.timeLeftForGame
           )
         );
@@ -207,6 +210,11 @@ export class ScrambledGameModuleComponent implements OnInit {
   handleTimerFinished(): void {
     console.log('Game over! Timer finished');
     this.timerFinished = true;
+  }
+
+  handleTimer(): void {
+    this.timeLeftForGame--;
+    console.log('Time left:', this.timeLeftForGame);
   }
 
   openDialog(
