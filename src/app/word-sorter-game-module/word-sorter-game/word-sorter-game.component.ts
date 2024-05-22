@@ -30,7 +30,7 @@ import { TimerComponent } from '../../timer/timer.component';
 })
 export class WordSorterGameComponent implements OnInit {
   readonly timeGivenForGame: number = 180;
-  timeLeftForGame: number = 0;
+  timeLeftForGame: number = this.timeGivenForGame;
   timerFinished: boolean = false;
   @Input() currentCategoryId?: string;
   currentCategory?: Category;
@@ -179,6 +179,9 @@ export class WordSorterGameComponent implements OnInit {
 
   handleTimerFinished(): void {
     console.log('Game over! Timer finished');
+    this.timeLeftForGame--;
+    if (this.timeLeftForGame === 0) {
+      // הצגת מסך סיכום המשחק
     this.timerFinished = true;
   }
   private goodGuessDialog(): void {
