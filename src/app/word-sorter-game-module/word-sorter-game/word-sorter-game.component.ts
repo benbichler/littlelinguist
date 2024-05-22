@@ -188,9 +188,9 @@ export class WordSorterGameComponent implements OnInit {
     this.timeLeftForGame--;
     if (this.timeLeftForGame === 0) {
       // הצגת מסך סיכום המשחק
-    this.timerFinished = true;
+      this.timerFinished = true;
+    }
   }
-
   private goodGuessDialog(): void {
     this.dialog.open(WordSorterDialogComponent, {
       data: {
