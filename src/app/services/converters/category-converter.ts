@@ -19,9 +19,7 @@ export const categoryConverter = {
     return {
       name: category.name,
       words: words,
-      lastModifiedDate: category.lastModifiedDate
-        ? Timestamp.fromDate(new Date(category.lastModifiedDate!))
-        : undefined,
+      lastModifiedDate: Timestamp.fromDate(category.lastModifiedDate),
     };
   },
   fromFirestore: (
@@ -33,7 +31,7 @@ export const categoryConverter = {
     const category = new Category(
       snapshot.id,
       data['name'],
-      data['lastModifiedDate']
+      data['lastModifiedDate'].toDate()
     );
 
     if (words) {
@@ -44,9 +42,6 @@ export const categoryConverter = {
       }
     }
 
-    if (data['lastModifiedDate']) {
-      category.lastModifiedDate = data['lastModifiedDate'].toDate();
-    }
     return category;
   },
 };

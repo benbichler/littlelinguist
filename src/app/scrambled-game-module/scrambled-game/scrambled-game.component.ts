@@ -97,7 +97,8 @@ export class ScrambledGameModuleComponent implements OnInit {
 
     if (this.currentCategoryId) {
       this.categoryService.get(this.currentCategoryId).then((category) => {
-        if (this.currentCategory) {
+        if (category) {
+          this.currentCategory = category;
           this.scrambledWord = this.mixUpLetters(
             this.currentCategory.words[0].origin.toLowerCase()
           );

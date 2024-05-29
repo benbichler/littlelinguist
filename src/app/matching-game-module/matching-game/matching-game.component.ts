@@ -77,7 +77,8 @@ export class MatchingGameComponent implements OnInit {
     if (this.currentCategoryId) {
       this.categoryService.get(this.currentCategoryId).then((category) => {
         console.log('Current Category:', this.currentCategory); // Debugging
-        if (this.currentCategory) {
+        if (category) {
+          this.currentCategory = category;
           this.processCategoryWords();
         } else {
           console.log('Failed to load category.'); // Debugging
