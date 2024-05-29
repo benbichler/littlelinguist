@@ -56,10 +56,10 @@ export class WordSorterGameComponent implements OnInit {
   }
 
   loadCurrentCategory(): void {
-    if (this.currentCategoryId) {
-      const categoryId = parseInt(this.currentCategoryId);
-      if (!isNaN(categoryId)) {
-        const category = this.categoryService.get(categoryId);
+    const categoryId = this.currentCategoryId;
+
+    if (categoryId) {
+      this.categoryService.get(categoryId).then((category) => {
         if (category) {
           this.currentCategory = category;
           this.retrieveExtraWords();
@@ -67,10 +67,10 @@ export class WordSorterGameComponent implements OnInit {
           console.error(`No category found with ID ${categoryId}`);
           // Handle the error appropriately, maybe redirect or show a message
         }
-      } else {
-        console.error('Invalid category ID:', this.currentCategoryId);
-        // Handle invalid ID appropriately
-      }
+      });
+    } else {
+      console.error('Invalid category ID:', this.currentCategoryId);
+      // Handle invalid ID appropriately
     }
   }
 
@@ -80,20 +80,25 @@ export class WordSorterGameComponent implements OnInit {
       this.displayWords = this.pickRandomWords(this.currentCategory, 3);
 
       // Get all categories and select a random one, excluding the current category
-      const allCategories = this.categoryService.list();
-      const otherCategories = allCategories.filter(
-        (cat) => cat && cat.id !== this.currentCategory?.id
-      );
-      if (otherCategories.length > 0) {
-        this.randomCategory =
-          otherCategories[Math.floor(Math.random() * otherCategories.length)];
-        if (this.randomCategory) {
-          this.displayWords = this.displayWords.concat(
-            this.pickRandomWords(this.randomCategory, 3)
+      const allCategories = this.categoryService
+        .list()
+        .then((allCategories) => {
+          const otherCategories = allCategories.filter(
+            (cat) => cat && cat.id !== this.currentCategory?.id
           );
-          this.shuffleDisplayWords();
-        }
-      }
+          if (otherCategories.length > 0) {
+            this.randomCategory =
+              otherCategories[
+                Math.floor(Math.random() * otherCategories.length)
+              ];
+            if (this.randomCategory) {
+              this.displayWords = this.displayWords.concat(
+                this.pickRandomWords(this.randomCategory, 3)
+              );
+              this.shuffleDisplayWords();
+            }
+          }
+        });
     }
   }
 
@@ -163,7 +168,7 @@ export class WordSorterGameComponent implements OnInit {
         this.gamePointsService.addGamePlayed(
           new GamePlayed(
             this.currentCategory.id,
-            3,
+            '3',
             new Date(),
             this.totalPoints,
             this.timeGivenForGame,

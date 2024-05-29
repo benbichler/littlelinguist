@@ -96,15 +96,14 @@ export class ScrambledGameModuleComponent implements OnInit {
     this.timeLeftForGame = this.timeGivenForGame;
 
     if (this.currentCategoryId) {
-      this.currentCategory = this.categoryService.get(
-        parseInt(this.currentCategoryId)
-      );
-      if (this.currentCategory) {
-        this.scrambledWord = this.mixUpLetters(
-          this.currentCategory.words[0].origin.toLowerCase()
-        );
-        console.log('Initial scrambled word:', this.scrambledWord);
-      }
+      this.categoryService.get(this.currentCategoryId).then((category) => {
+        if (this.currentCategory) {
+          this.scrambledWord = this.mixUpLetters(
+            this.currentCategory.words[0].origin.toLowerCase()
+          );
+          console.log('Initial scrambled word:', this.scrambledWord);
+        }
+      });
     }
   }
 
@@ -151,7 +150,7 @@ export class ScrambledGameModuleComponent implements OnInit {
         this.gamePointsService.addGamePlayed(
           new GamePlayed(
             this.currentCategory.id,
-            2,
+            '2',
             new Date(),
             this.totalPoints,
             this.timeGivenForGame,

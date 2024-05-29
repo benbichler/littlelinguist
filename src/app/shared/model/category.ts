@@ -20,6 +20,7 @@ export class Category {
 
     this.updatedWithinLastWeek = this.lastModifiedDate > oneWeekAgo;
   }
+  
   isUpdatedWithinLastWeek(): boolean {
     const fixedDate = new Date(this.lastModifiedDate);
     const oneWeekInMilliseconds = 7 * 24 * 60 * 60 * 1000;

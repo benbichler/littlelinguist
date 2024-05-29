@@ -1,13 +1,13 @@
 export class GamePlayed {
-  chosenCategoryID: number;
-  gamePlayedID: number;
+  chosenCategoryID: string;
+  gamePlayedID: string;
   datePlayed = new Date();
   amountOfPoints: number;
   secondsPlayed: number;
   secondsLeftInGame: number;
   constructor(
-    chosenCategoryID: number,
-    gamePlayedID: number,
+    chosenCategoryID: string,
+    gamePlayedID: string,
     datePlayed: Date,
     amountOfPoints: number,
     secondsPlayed: number,

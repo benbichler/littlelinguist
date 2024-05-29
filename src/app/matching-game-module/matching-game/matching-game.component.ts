@@ -75,15 +75,14 @@ export class MatchingGameComponent implements OnInit {
 
   private loadCurrentCategory(): void {
     if (this.currentCategoryId) {
-      this.currentCategory = this.categoryService.get(
-        parseInt(this.currentCategoryId)
-      );
-      console.log('Current Category:', this.currentCategory); // Debugging
-      if (this.currentCategory) {
-        this.processCategoryWords();
-      } else {
-        console.log('Failed to load category.'); // Debugging
-      }
+      this.categoryService.get(this.currentCategoryId).then((category) => {
+        console.log('Current Category:', this.currentCategory); // Debugging
+        if (this.currentCategory) {
+          this.processCategoryWords();
+        } else {
+          console.log('Failed to load category.'); // Debugging
+        }
+      });
     }
   }
 
@@ -224,7 +223,7 @@ export class MatchingGameComponent implements OnInit {
             this.GamePointsService.addGamePlayed(
               new GamePlayed(
                 this.currentCategory!.id,
-                1,
+                '1',
                 new Date(),
                 this.totalPoints,
                 this.timeGivenForGame,
@@ -270,7 +269,7 @@ export class MatchingGameComponent implements OnInit {
             this.GamePointsService.addGamePlayed(
               new GamePlayed(
                 this.currentCategory!.id,
-                1,
+                '1',
                 new Date(),
                 this.totalPoints,
                 this.timeGivenForGame,

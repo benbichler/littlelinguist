@@ -1,4 +1,8 @@
-import { QueryDocumentSnapshot, SnapshotOptions } from 'firebase/firestore';
+import {
+  QueryDocumentSnapshot,
+  SnapshotOptions,
+  Timestamp,
+} from 'firebase/firestore';
 import { Category } from '../../shared/model/category';
 import { TranslatedWord } from '../../shared/model/translateword';
 
@@ -15,6 +19,9 @@ export const categoryConverter = {
     return {
       name: category.name,
       words: words,
+      lastModifiedDate: category.lastModifiedDate
+        ? Timestamp.fromDate(new Date(category.lastModifiedDate!))
+        : undefined,
     };
   },
   fromFirestore: (
@@ -23,7 +30,11 @@ export const categoryConverter = {
   ) => {
     const data = snapshot.data(options);
     const words = data['words'];
-    const category = new Category(snapshot.id, data['name'], new Date());
+    const category = new Category(
+      snapshot.id,
+      data['name'],
+      data['lastModifiedDate']
+    );
 
     if (words) {
       for (let i = 0; i < words.length; i++) {
@@ -31,6 +42,10 @@ export const categoryConverter = {
           new TranslatedWord(words[i].origin, words[i].target)
         );
       }
+    }
+
+    if (data['lastModifiedDate']) {
+      category.lastModifiedDate = data['lastModifiedDate'].toDate();
     }
     return category;
   },

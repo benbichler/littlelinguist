@@ -75,7 +75,7 @@ export class DashboardViewComponent implements OnInit {
     const categoryCounts = new Map<number, number>();
 
     for (let i = 0; i < this.gamesPlayedOverall.length; i++) {
-      const category = this.gamesPlayedOverall[i].chosenCategoryID;
+      const category = parseInt(this.gamesPlayedOverall[i].chosenCategoryID);
       const count = categoryCounts.get(category) || 0;
       categoryCounts.set(category, count + 1);
     }

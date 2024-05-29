@@ -10,6 +10,7 @@ import {
   getDocs,
   doc,
   setDoc,
+  deleteDoc,
 } from '@angular/fire/firestore';
 import { categoryConverter } from './converters/category-converter';
 
@@ -60,9 +61,18 @@ export class CategoryService {
     );
   }
 
-  delete(id: string): void {}
+  async delete(existingCategoryId: string) {
+    const personDocRef = doc(
+      this.firestoreService,
+      'categories',
+      existingCategoryId
+    ).withConverter(categoryConverter);
+    return deleteDoc(personDocRef);
+  }
 
   async update(existingCategory: Category): Promise<void> {
+    existingCategory.lastModifiedDate = new Date();
+
     const categoryDocRef = doc(
       this.firestoreService,
       'categories',

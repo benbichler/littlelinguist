@@ -51,10 +51,13 @@ export class CategoryListComponent implements OnInit {
       data: name,
     });
 
-    dialogRef.afterClosed().subscribe((deletionConfirmed) => {
-      if (deletionConfirmed) {
-        this.categoryService.delete(id);
-        this.categoryService.list();
+    dialogRef.afterClosed().subscribe((deletionResult) => {
+      if (deletionResult) {
+        this.categoryService.delete(id).then(() => {
+          this.categoryService
+            .list()
+            .then((result: Category[]) => (this.categories = result));
+        });
       }
     });
   }
