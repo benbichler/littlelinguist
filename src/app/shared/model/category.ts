@@ -2,7 +2,7 @@ import { Language } from './language';
 import { TranslatedWord } from './translateword';
 
 export class Category {
-  id: number;
+  id: string;
   name: string;
   origin: Language = Language.English;
   target: Language = Language.Hebrew;
@@ -10,7 +10,7 @@ export class Category {
   words: TranslatedWord[] = [];
   updatedWithinLastWeek: boolean;
 
-  constructor(id: number, name: string, lastModifiedDate: Date) {
+  constructor(id: string, name: string, lastModifiedDate: Date) {
     this.id = id;
     this.name = name;
     this.lastModifiedDate = lastModifiedDate;

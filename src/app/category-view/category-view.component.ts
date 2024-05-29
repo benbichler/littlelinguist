@@ -37,16 +37,19 @@ export class CategoryViewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.categories = this.categoryService.list();
+    this.categoryService
+      .list()
+      .then((result: Category[]) => (this.categories = result));
   }
 
   onCategorySelected(): void {
+    const selectedCategoryId = this.selectedCategoryId; // Convert to number
     this.selectedCategory = this.categories.find(
-      (category) => category.id === +this.selectedCategoryId
+      (category) => category.id.toString() === selectedCategoryId.toString()
     );
   }
 
-  startGame(id: number): void {
+  startGame(id: string): void {
     this.dialog.open(CategoryDialogComponent, {
       data: id,
     });

@@ -26,7 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./forms-demo.component.css'],
 })
 export class FormsDemoComponent implements OnInit {
-  currentCategory: Category = new Category(-1, '', new Date());
+  currentCategory: Category = new Category('', '', new Date());
   constructor(
     private categoryService: CategoryService,
     private router: Router
@@ -35,11 +35,11 @@ export class FormsDemoComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.idString) {
-      const id: number = parseInt(this.idString);
-      const category = this.categoryService.get(id);
-      if (category) {
-        this.currentCategory = category;
-      }
+      this.categoryService.get(this.idString).then((categoryFromService) => {
+        if (categoryFromService) {
+          this.currentCategory = categoryFromService;
+        }
+      });
     }
   }
 
@@ -64,10 +64,13 @@ export class FormsDemoComponent implements OnInit {
   onSubmitRegistration(): void {
     console.log('Form submitted!');
     if (this.idString) {
-      this.categoryService.update(this.currentCategory);
+      this.categoryService
+        .update(this.currentCategory)
+        .then(() => this.router.navigate(['']));
     } else {
-      this.categoryService.add(this.currentCategory);
+      this.categoryService
+        .add(this.currentCategory)
+        .then(() => this.router.navigate(['/']));
     }
-    this.router.navigate(['/']);
   }
 }

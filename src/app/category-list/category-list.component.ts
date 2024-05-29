@@ -29,11 +29,13 @@ export class CategoryListComponent implements OnInit {
   constructor(
     private categoryService: CategoryService,
     private dialog: MatDialog,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.categories = this.categoryService.list();
+    this.categoryService
+      .list()
+      .then((result: Category[]) => (this.categories = result));
   }
 
   addNewCategory(): void {
@@ -41,11 +43,10 @@ export class CategoryListComponent implements OnInit {
   }
 
   editCategory(categoryId: number): void {
-    this.categoryService.setCurrentCategoryId(categoryId.toString());
     this.router.navigate(['/category', categoryId]);
   }
 
-  deleteCategory(id: number, name: string) {
+  deleteCategory(id: string, name: string) {
     const dialogRef = this.dialog.open(DeleteCategoryDialogComponent, {
       data: name,
     });
@@ -53,7 +54,7 @@ export class CategoryListComponent implements OnInit {
     dialogRef.afterClosed().subscribe((deletionConfirmed) => {
       if (deletionConfirmed) {
         this.categoryService.delete(id);
-        this.categories = this.categoryService.list();
+        this.categoryService.list();
       }
     });
   }
