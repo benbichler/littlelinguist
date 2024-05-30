@@ -31,6 +31,8 @@ export class DashboardViewComponent implements OnInit {
     this.totalTimePlayed();
     this.averagePlayTimePerGame();
     this.calculateGamesFinishedEarlyPercent();
+
+    console.log(this.mostPlayedCategory);
   }
   calculateGamesFinishedEarlyPercent(): void {
     this.gamesEndedEarlyCount = 0;
@@ -72,27 +74,27 @@ export class DashboardViewComponent implements OnInit {
   }
 
   calculateMostPlayedCategory(): void {
-    const categoryCounts = new Map<number, number>();
+    let maxCount = 0;
+    let mostPlayedCategory: string | undefined;
 
     for (let i = 0; i < this.gamesPlayedOverall.length; i++) {
-      const category = parseInt(this.gamesPlayedOverall[i].chosenCategoryID);
-      const count = categoryCounts.get(category) || 0;
-      categoryCounts.set(category, count + 1);
-    }
-    let maxCount = 0;
-    let mostPlayedCategory: number | undefined;
-    for (let [category, count] of categoryCounts.entries()) {
+      const category = this.gamesPlayedOverall[i].chosenCategoryID;
+      let count = 0;
+
+      for (let j = 0; j < this.gamesPlayedOverall.length; j++) {
+        if (this.gamesPlayedOverall[j].chosenCategoryID === category) {
+          count++;
+        }
+      }
+
+      // Update maxCount and mostPlayedCategory if current count is higher
       if (count > maxCount) {
         maxCount = count;
         mostPlayedCategory = category;
       }
     }
 
-    if (mostPlayedCategory !== undefined) {
-      this.mostPlayedCategory = mostPlayedCategory.toString();
-    } else {
-      this.mostPlayedCategory = '';
-    }
+    this.mostPlayedCategory = mostPlayedCategory || '';
   }
 
   calculatePerfectGamesPercentage(): void {
